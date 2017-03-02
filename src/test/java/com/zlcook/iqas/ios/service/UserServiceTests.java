@@ -31,8 +31,6 @@ public class UserServiceTests {
 		user.setLoginName("liang");
 		user.setRealName("周亮");
 		user.setPassword("123");
-		User savedUser =userService.save(user);
-		System.out.println(savedUser.toString());
 	}
 
 	public UserService getUserService() {

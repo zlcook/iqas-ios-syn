@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlcook.iqas.ios.mapper.UserWordMapper" >
+  <resultMap id="BaseResultMap" type="com.zlcook.iqas.ios.bean.UserWord" >
+    <id column="user_word_id" property="userWordId" jdbcType="INTEGER" />
+    <result column="topi" property="topi" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="word" property="word" jdbcType="VARCHAR" />
+    <result column="wordlearn" property="wordlearn" jdbcType="INTEGER" />
+    <result column="wordtest" property="wordtest" jdbcType="INTEGER" />
+    <result column="wrongtesttimes" property="wrongtesttimes" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_word_id, topi, user_id, word, wordlearn, wordtest, wrongtesttimes
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zlcook.iqas.ios.bean.UserWordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_word
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_word
+    where user_word_id = #{userWordId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_word
+    where user_word_id = #{userWordId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zlcook.iqas.ios.bean.UserWordExample" >
+    delete from user_word
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zlcook.iqas.ios.bean.UserWord" >
+    insert into user_word (user_word_id, topi, user_id, 
+      word, wordlearn, wordtest, 
+      wrongtesttimes)
+    values (#{userWordId,jdbcType=INTEGER}, #{topi,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{word,jdbcType=VARCHAR}, #{wordlearn,jdbcType=INTEGER}, #{wordtest,jdbcType=INTEGER}, 
+      #{wrongtesttimes,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlcook.iqas.ios.bean.UserWord" >
+    insert into user_word
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userWordId != null" >
+        user_word_id,
+      </if>
+      <if test="topi != null" >
+        topi,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="word != null" >
+        word,
+      </if>
+      <if test="wordlearn != null" >
+        wordlearn,
+      </if>
+      <if test="wordtest != null" >
+        wordtest,
+      </if>
+      <if test="wrongtesttimes != null" >
+        wrongtesttimes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userWordId != null" >
+        #{userWordId,jdbcType=INTEGER},
+      </if>
+      <if test="topi != null" >
+        #{topi,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="word != null" >
+        #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="wordlearn != null" >
+        #{wordlearn,jdbcType=INTEGER},
+      </if>
+      <if test="wordtest != null" >
+        #{wordtest,jdbcType=INTEGER},
+      </if>
+      <if test="wrongtesttimes != null" >
+        #{wrongtesttimes,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zlcook.iqas.ios.bean.UserWordExample" resultType="java.lang.Integer" >
+    select count(*) from user_word
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_word
+    <set >
+      <if test="record.userWordId != null" >
+        user_word_id = #{record.userWordId,jdbcType=INTEGER},
+      </if>
+      <if test="record.topi != null" >
+        topi = #{record.topi,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.word != null" >
+        word = #{record.word,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wordlearn != null" >
+        wordlearn = #{record.wordlearn,jdbcType=INTEGER},
+      </if>
+      <if test="record.wordtest != null" >
+        wordtest = #{record.wordtest,jdbcType=INTEGER},
+      </if>
+      <if test="record.wrongtesttimes != null" >
+        wrongtesttimes = #{record.wrongtesttimes,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_word
+    set user_word_id = #{record.userWordId,jdbcType=INTEGER},
+      topi = #{record.topi,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      word = #{record.word,jdbcType=VARCHAR},
+      wordlearn = #{record.wordlearn,jdbcType=INTEGER},
+      wordtest = #{record.wordtest,jdbcType=INTEGER},
+      wrongtesttimes = #{record.wrongtesttimes,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlcook.iqas.ios.bean.UserWord" >
+    update user_word
+    <set >
+      <if test="topi != null" >
+        topi = #{topi,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="word != null" >
+        word = #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="wordlearn != null" >
+        wordlearn = #{wordlearn,jdbcType=INTEGER},
+      </if>
+      <if test="wordtest != null" >
+        wordtest = #{wordtest,jdbcType=INTEGER},
+      </if>
+      <if test="wrongtesttimes != null" >
+        wrongtesttimes = #{wrongtesttimes,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_word_id = #{userWordId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlcook.iqas.ios.bean.UserWord" >
+    update user_word
+    set topi = #{topi,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      word = #{word,jdbcType=VARCHAR},
+      wordlearn = #{wordlearn,jdbcType=INTEGER},
+      wordtest = #{wordtest,jdbcType=INTEGER},
+      wrongtesttimes = #{wrongtesttimes,jdbcType=INTEGER}
+    where user_word_id = #{userWordId,jdbcType=INTEGER}
+  </update>
+</mapper>

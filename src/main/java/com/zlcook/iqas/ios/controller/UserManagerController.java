@@ -4,20 +4,21 @@ package com.zlcook.iqas.ios.controller;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zlcook.iqas.ios.dto.LoginDTO;
 import com.zlcook.iqas.ios.enums.ResponseStateEnum;
 import com.zlcook.iqas.ios.form.RegisterForm;
-import com.zlcook.iqas.ios.model.User;
 import com.zlcook.iqas.ios.service.UserService;
-import com.zlcook.iqas.ios.vo.BaseStatus;
+import com.zlcook.iqas.ios.vo.BaseStatusVO;
+import com.zlcook.iqas.ios.vo.LoginVO;
 
 /**
 * @author 周亮 
@@ -43,9 +44,9 @@ public class UserManagerController {
 	 * @return  json格式字符串
 	 */
 	@RequestMapping(value="/register",produces="application/json; charset=UTF-8", method=RequestMethod.POST)
-	public  BaseStatus register( @Valid RegisterForm form,BindingResult bindingResult){
+	public  BaseStatusVO register( @Valid RegisterForm form,BindingResult bindingResult){
 		
-		BaseStatus status=new BaseStatus(ResponseStateEnum.SUCCESS);
+		BaseStatusVO status=new BaseStatusVO(ResponseStateEnum.SUCCESS);
 		if( bindingResult.hasErrors()){
 			status.setStatuEnum(ResponseStateEnum.PARAM_ERROR);
 			return status;
@@ -58,12 +59,29 @@ public class UserManagerController {
 		status.setStatuEnum(ResponseStateEnum.USER_EXIST);
 		return status;
 	}
-
-	
-	public BaseStatus login(@PathVariable(required=true)String loginName,@PathVariable(required=true)String password){
+	/**
+	 * User登录，并返回json数据
+	 * @param loginName 登录名
+	 * @param password 密码
+	 * @return
+	 * 将BaseStatusVO<LoginVO>对象的所有属性以json格式返回
+	 * 
+	 */
+	@RequestMapping(value="/login",produces="application/json; charset=UTF-8", method=RequestMethod.POST)
+	public BaseStatusVO<LoginVO> login(@RequestParam(required=true)String loginName,@RequestParam(required=true)String password){
 		
+		BaseStatusVO<LoginVO> status=new BaseStatusVO<LoginVO>(ResponseStateEnum.SUCCESS);
 		
-		return null;
+		LoginDTO loginDTO =userService.login(loginName, password);
+		if( loginDTO.getStatus() != 1){
+			status.setStatuEnum(ResponseStateEnum.USER_LOGING_PARROR_ERROR);
+			return status;
+		}
+		
+		LoginVO loginVO = new LoginVO();
+		BeanUtils.copyProperties(loginDTO, loginVO);
+		status.setData(loginVO);
+		return status;
 	}
 	public UserService getUserService() {
 		return userService;

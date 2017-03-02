@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlcook.iqas.ios.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.zlcook.iqas.ios.bean.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="token" property="token" jdbcType="CHAR" />
+    <result column="adaptive" property="adaptive" jdbcType="INTEGER" />
+    <result column="class_num" property="classNum" jdbcType="INTEGER" />
+    <result column="grade" property="grade" jdbcType="VARCHAR" />
+    <result column="learningstyle1" property="learningstyle1" jdbcType="INTEGER" />
+    <result column="learningstyle2" property="learningstyle2" jdbcType="INTEGER" />
+    <result column="learningstyle3" property="learningstyle3" jdbcType="INTEGER" />
+    <result column="learningtyle4" property="learningtyle4" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="login_times" property="loginTimes" jdbcType="INTEGER" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="presentgrade" property="presentgrade" jdbcType="INTEGER" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="resourcecount1" property="resourcecount1" jdbcType="INTEGER" />
+    <result column="resourcecount2" property="resourcecount2" jdbcType="INTEGER" />
+    <result column="resourcecount3" property="resourcecount3" jdbcType="INTEGER" />
+    <result column="resourcecount4" property="resourcecount4" jdbcType="INTEGER" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="topiccount1" property="topiccount1" jdbcType="INTEGER" />
+    <result column="topiccount2" property="topiccount2" jdbcType="INTEGER" />
+    <result column="wordcount" property="wordcount" jdbcType="INTEGER" />
+    <result column="wordcount1" property="wordcount1" jdbcType="INTEGER" />
+    <result column="workcount" property="workcount" jdbcType="INTEGER" />
+    <result column="workcount1" property="workcount1" jdbcType="INTEGER" />
+    <result column="workcount2" property="workcount2" jdbcType="INTEGER" />
+    <result column="workcount3" property="workcount3" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, token, adaptive, class_num, grade, learningstyle1, learningstyle2, learningstyle3, 
+    learningtyle4, level, login_name, login_times, password, presentgrade, real_name, 
+    resourcecount1, resourcecount2, resourcecount3, resourcecount4, school, score, sex, 
+    topiccount1, topiccount2, wordcount, wordcount1, workcount, workcount1, workcount2, 
+    workcount3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zlcook.iqas.ios.bean.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zlcook.iqas.ios.bean.UserExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zlcook.iqas.ios.bean.User" >
+    insert into user (user_id, token, adaptive, 
+      class_num, grade, learningstyle1, 
+      learningstyle2, learningstyle3, learningtyle4, 
+      level, login_name, login_times, 
+      password, presentgrade, real_name, 
+      resourcecount1, resourcecount2, resourcecount3, 
+      resourcecount4, school, score, 
+      sex, topiccount1, topiccount2, 
+      wordcount, wordcount1, workcount, 
+      workcount1, workcount2, workcount3
+      )
+    values (#{userId,jdbcType=INTEGER}, #{token,jdbcType=CHAR}, #{adaptive,jdbcType=INTEGER}, 
+      #{classNum,jdbcType=INTEGER}, #{grade,jdbcType=VARCHAR}, #{learningstyle1,jdbcType=INTEGER}, 
+      #{learningstyle2,jdbcType=INTEGER}, #{learningstyle3,jdbcType=INTEGER}, #{learningtyle4,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{loginTimes,jdbcType=INTEGER}, 
+      #{password,jdbcType=VARCHAR}, #{presentgrade,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, 
+      #{resourcecount1,jdbcType=INTEGER}, #{resourcecount2,jdbcType=INTEGER}, #{resourcecount3,jdbcType=INTEGER}, 
+      #{resourcecount4,jdbcType=INTEGER}, #{school,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
+      #{sex,jdbcType=INTEGER}, #{topiccount1,jdbcType=INTEGER}, #{topiccount2,jdbcType=INTEGER}, 
+      #{wordcount,jdbcType=INTEGER}, #{wordcount1,jdbcType=INTEGER}, #{workcount,jdbcType=INTEGER}, 
+      #{workcount1,jdbcType=INTEGER}, #{workcount2,jdbcType=INTEGER}, #{workcount3,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlcook.iqas.ios.bean.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="adaptive != null" >
+        adaptive,
+      </if>
+      <if test="classNum != null" >
+        class_num,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="learningstyle1 != null" >
+        learningstyle1,
+      </if>
+      <if test="learningstyle2 != null" >
+        learningstyle2,
+      </if>
+      <if test="learningstyle3 != null" >
+        learningstyle3,
+      </if>
+      <if test="learningtyle4 != null" >
+        learningtyle4,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="loginName != null" >
+        login_name,
+      </if>
+      <if test="loginTimes != null" >
+        login_times,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="presentgrade != null" >
+        presentgrade,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="resourcecount1 != null" >
+        resourcecount1,
+      </if>
+      <if test="resourcecount2 != null" >
+        resourcecount2,
+      </if>
+      <if test="resourcecount3 != null" >
+        resourcecount3,
+      </if>
+      <if test="resourcecount4 != null" >
+        resourcecount4,
+      </if>
+      <if test="school != null" >
+        school,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="topiccount1 != null" >
+        topiccount1,
+      </if>
+      <if test="topiccount2 != null" >
+        topiccount2,
+      </if>
+      <if test="wordcount != null" >
+        wordcount,
+      </if>
+      <if test="wordcount1 != null" >
+        wordcount1,
+      </if>
+      <if test="workcount != null" >
+        workcount,
+      </if>
+      <if test="workcount1 != null" >
+        workcount1,
+      </if>
+      <if test="workcount2 != null" >
+        workcount2,
+      </if>
+      <if test="workcount3 != null" >
+        workcount3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=CHAR},
+      </if>
+      <if test="adaptive != null" >
+        #{adaptive,jdbcType=INTEGER},
+      </if>
+      <if test="classNum != null" >
+        #{classNum,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="learningstyle1 != null" >
+        #{learningstyle1,jdbcType=INTEGER},
+      </if>
+      <if test="learningstyle2 != null" >
+        #{learningstyle2,jdbcType=INTEGER},
+      </if>
+      <if test="learningstyle3 != null" >
+        #{learningstyle3,jdbcType=INTEGER},
+      </if>
+      <if test="learningtyle4 != null" >
+        #{learningtyle4,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTimes != null" >
+        #{loginTimes,jdbcType=INTEGER},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="presentgrade != null" >
+        #{presentgrade,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcecount1 != null" >
+        #{resourcecount1,jdbcType=INTEGER},
+      </if>
+      <if test="resourcecount2 != null" >
+        #{resourcecount2,jdbcType=INTEGER},
+      </if>
+      <if test="resourcecount3 != null" >
+        #{resourcecount3,jdbcType=INTEGER},
+      </if>
+      <if test="resourcecount4 != null" >
+        #{resourcecount4,jdbcType=INTEGER},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="topiccount1 != null" >
+        #{topiccount1,jdbcType=INTEGER},
+      </if>
+      <if test="topiccount2 != null" >
+        #{topiccount2,jdbcType=INTEGER},
+      </if>
+      <if test="wordcount != null" >
+        #{wordcount,jdbcType=INTEGER},
+      </if>
+      <if test="wordcount1 != null" >
+        #{wordcount1,jdbcType=INTEGER},
+      </if>
+      <if test="workcount != null" >
+        #{workcount,jdbcType=INTEGER},
+      </if>
+      <if test="workcount1 != null" >
+        #{workcount1,jdbcType=INTEGER},
+      </if>
+      <if test="workcount2 != null" >
+        #{workcount2,jdbcType=INTEGER},
+      </if>
+      <if test="workcount3 != null" >
+        #{workcount3,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zlcook.iqas.ios.bean.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.token != null" >
+        token = #{record.token,jdbcType=CHAR},
+      </if>
+      <if test="record.adaptive != null" >
+        adaptive = #{record.adaptive,jdbcType=INTEGER},
+      </if>
+      <if test="record.classNum != null" >
+        class_num = #{record.classNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.grade != null" >
+        grade = #{record.grade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.learningstyle1 != null" >
+        learningstyle1 = #{record.learningstyle1,jdbcType=INTEGER},
+      </if>
+      <if test="record.learningstyle2 != null" >
+        learningstyle2 = #{record.learningstyle2,jdbcType=INTEGER},
+      </if>
+      <if test="record.learningstyle3 != null" >
+        learningstyle3 = #{record.learningstyle3,jdbcType=INTEGER},
+      </if>
+      <if test="record.learningtyle4 != null" >
+        learningtyle4 = #{record.learningtyle4,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginName != null" >
+        login_name = #{record.loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginTimes != null" >
+        login_times = #{record.loginTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.presentgrade != null" >
+        presentgrade = #{record.presentgrade,jdbcType=INTEGER},
+      </if>
+      <if test="record.realName != null" >
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourcecount1 != null" >
+        resourcecount1 = #{record.resourcecount1,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourcecount2 != null" >
+        resourcecount2 = #{record.resourcecount2,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourcecount3 != null" >
+        resourcecount3 = #{record.resourcecount3,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourcecount4 != null" >
+        resourcecount4 = #{record.resourcecount4,jdbcType=INTEGER},
+      </if>
+      <if test="record.school != null" >
+        school = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.topiccount1 != null" >
+        topiccount1 = #{record.topiccount1,jdbcType=INTEGER},
+      </if>
+      <if test="record.topiccount2 != null" >
+        topiccount2 = #{record.topiccount2,jdbcType=INTEGER},
+      </if>
+      <if test="record.wordcount != null" >
+        wordcount = #{record.wordcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.wordcount1 != null" >
+        wordcount1 = #{record.wordcount1,jdbcType=INTEGER},
+      </if>
+      <if test="record.workcount != null" >
+        workcount = #{record.workcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.workcount1 != null" >
+        workcount1 = #{record.workcount1,jdbcType=INTEGER},
+      </if>
+      <if test="record.workcount2 != null" >
+        workcount2 = #{record.workcount2,jdbcType=INTEGER},
+      </if>
+      <if test="record.workcount3 != null" >
+        workcount3 = #{record.workcount3,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      token = #{record.token,jdbcType=CHAR},
+      adaptive = #{record.adaptive,jdbcType=INTEGER},
+      class_num = #{record.classNum,jdbcType=INTEGER},
+      grade = #{record.grade,jdbcType=VARCHAR},
+      learningstyle1 = #{record.learningstyle1,jdbcType=INTEGER},
+      learningstyle2 = #{record.learningstyle2,jdbcType=INTEGER},
+      learningstyle3 = #{record.learningstyle3,jdbcType=INTEGER},
+      learningtyle4 = #{record.learningtyle4,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=INTEGER},
+      login_name = #{record.loginName,jdbcType=VARCHAR},
+      login_times = #{record.loginTimes,jdbcType=INTEGER},
+      password = #{record.password,jdbcType=VARCHAR},
+      presentgrade = #{record.presentgrade,jdbcType=INTEGER},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      resourcecount1 = #{record.resourcecount1,jdbcType=INTEGER},
+      resourcecount2 = #{record.resourcecount2,jdbcType=INTEGER},
+      resourcecount3 = #{record.resourcecount3,jdbcType=INTEGER},
+      resourcecount4 = #{record.resourcecount4,jdbcType=INTEGER},
+      school = #{record.school,jdbcType=VARCHAR},
+      score = #{record.score,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=INTEGER},
+      topiccount1 = #{record.topiccount1,jdbcType=INTEGER},
+      topiccount2 = #{record.topiccount2,jdbcType=INTEGER},
+      wordcount = #{record.wordcount,jdbcType=INTEGER},
+      wordcount1 = #{record.wordcount1,jdbcType=INTEGER},
+      workcount = #{record.workcount,jdbcType=INTEGER},
+      workcount1 = #{record.workcount1,jdbcType=INTEGER},
+      workcount2 = #{record.workcount2,jdbcType=INTEGER},
+      workcount3 = #{record.workcount3,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlcook.iqas.ios.bean.User" >
+    update user
+    <set >
+      <if test="token != null" >
+        token = #{token,jdbcType=CHAR},
+      </if>
+      <if test="adaptive != null" >
+        adaptive = #{adaptive,jdbcType=INTEGER},
+      </if>
+      <if test="classNum != null" >
+        class_num = #{classNum,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="learningstyle1 != null" >
+        learningstyle1 = #{learningstyle1,jdbcType=INTEGER},
+      </if>
+      <if test="learningstyle2 != null" >
+        learningstyle2 = #{learningstyle2,jdbcType=INTEGER},
+      </if>
+      <if test="learningstyle3 != null" >
+        learningstyle3 = #{learningstyle3,jdbcType=INTEGER},
+      </if>
+      <if test="learningtyle4 != null" >
+        learningtyle4 = #{learningtyle4,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="loginName != null" >
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTimes != null" >
+        login_times = #{loginTimes,jdbcType=INTEGER},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="presentgrade != null" >
+        presentgrade = #{presentgrade,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcecount1 != null" >
+        resourcecount1 = #{resourcecount1,jdbcType=INTEGER},
+      </if>
+      <if test="resourcecount2 != null" >
+        resourcecount2 = #{resourcecount2,jdbcType=INTEGER},
+      </if>
+      <if test="resourcecount3 != null" >
+        resourcecount3 = #{resourcecount3,jdbcType=INTEGER},
+      </if>
+      <if test="resourcecount4 != null" >
+        resourcecount4 = #{resourcecount4,jdbcType=INTEGER},
+      </if>
+      <if test="school != null" >
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="topiccount1 != null" >
+        topiccount1 = #{topiccount1,jdbcType=INTEGER},
+      </if>
+      <if test="topiccount2 != null" >
+        topiccount2 = #{topiccount2,jdbcType=INTEGER},
+      </if>
+      <if test="wordcount != null" >
+        wordcount = #{wordcount,jdbcType=INTEGER},
+      </if>
+      <if test="wordcount1 != null" >
+        wordcount1 = #{wordcount1,jdbcType=INTEGER},
+      </if>
+      <if test="workcount != null" >
+        workcount = #{workcount,jdbcType=INTEGER},
+      </if>
+      <if test="workcount1 != null" >
+        workcount1 = #{workcount1,jdbcType=INTEGER},
+      </if>
+      <if test="workcount2 != null" >
+        workcount2 = #{workcount2,jdbcType=INTEGER},
+      </if>
+      <if test="workcount3 != null" >
+        workcount3 = #{workcount3,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlcook.iqas.ios.bean.User" >
+    update user
+    set token = #{token,jdbcType=CHAR},
+      adaptive = #{adaptive,jdbcType=INTEGER},
+      class_num = #{classNum,jdbcType=INTEGER},
+      grade = #{grade,jdbcType=VARCHAR},
+      learningstyle1 = #{learningstyle1,jdbcType=INTEGER},
+      learningstyle2 = #{learningstyle2,jdbcType=INTEGER},
+      learningstyle3 = #{learningstyle3,jdbcType=INTEGER},
+      learningtyle4 = #{learningtyle4,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      login_name = #{loginName,jdbcType=VARCHAR},
+      login_times = #{loginTimes,jdbcType=INTEGER},
+      password = #{password,jdbcType=VARCHAR},
+      presentgrade = #{presentgrade,jdbcType=INTEGER},
+      real_name = #{realName,jdbcType=VARCHAR},
+      resourcecount1 = #{resourcecount1,jdbcType=INTEGER},
+      resourcecount2 = #{resourcecount2,jdbcType=INTEGER},
+      resourcecount3 = #{resourcecount3,jdbcType=INTEGER},
+      resourcecount4 = #{resourcecount4,jdbcType=INTEGER},
+      school = #{school,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=INTEGER},
+      topiccount1 = #{topiccount1,jdbcType=INTEGER},
+      topiccount2 = #{topiccount2,jdbcType=INTEGER},
+      wordcount = #{wordcount,jdbcType=INTEGER},
+      wordcount1 = #{wordcount1,jdbcType=INTEGER},
+      workcount = #{workcount,jdbcType=INTEGER},
+      workcount1 = #{workcount1,jdbcType=INTEGER},
+      workcount2 = #{workcount2,jdbcType=INTEGER},
+      workcount3 = #{workcount3,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlcook.iqas.ios.mapper.UserTestCountMapper" >
+  <resultMap id="BaseResultMap" type="com.zlcook.iqas.ios.bean.UserTestCount" >
+    <id column="usertestcount_id" property="usertestcountId" jdbcType="INTEGER" />
+    <result column="test1count" property="test1count" jdbcType="INTEGER" />
+    <result column="test1rightcount" property="test1rightcount" jdbcType="INTEGER" />
+    <result column="test2count" property="test2count" jdbcType="INTEGER" />
+    <result column="test2rightcount" property="test2rightcount" jdbcType="INTEGER" />
+    <result column="test3count" property="test3count" jdbcType="INTEGER" />
+    <result column="test3rightcount" property="test3rightcount" jdbcType="INTEGER" />
+    <result column="test4count" property="test4count" jdbcType="INTEGER" />
+    <result column="test4rightcount" property="test4rightcount" jdbcType="INTEGER" />
+    <result column="testcount" property="testcount" jdbcType="INTEGER" />
+    <result column="testrightcount" property="testrightcount" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    usertestcount_id, test1count, test1rightcount, test2count, test2rightcount, test3count, 
+    test3rightcount, test4count, test4rightcount, testcount, testrightcount, user_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zlcook.iqas.ios.bean.UserTestCountExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_test_count
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_test_count
+    where usertestcount_id = #{usertestcountId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_test_count
+    where usertestcount_id = #{usertestcountId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zlcook.iqas.ios.bean.UserTestCountExample" >
+    delete from user_test_count
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zlcook.iqas.ios.bean.UserTestCount" >
+    insert into user_test_count (usertestcount_id, test1count, test1rightcount, 
+      test2count, test2rightcount, test3count, 
+      test3rightcount, test4count, test4rightcount, 
+      testcount, testrightcount, user_id
+      )
+    values (#{usertestcountId,jdbcType=INTEGER}, #{test1count,jdbcType=INTEGER}, #{test1rightcount,jdbcType=INTEGER}, 
+      #{test2count,jdbcType=INTEGER}, #{test2rightcount,jdbcType=INTEGER}, #{test3count,jdbcType=INTEGER}, 
+      #{test3rightcount,jdbcType=INTEGER}, #{test4count,jdbcType=INTEGER}, #{test4rightcount,jdbcType=INTEGER}, 
+      #{testcount,jdbcType=INTEGER}, #{testrightcount,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlcook.iqas.ios.bean.UserTestCount" >
+    insert into user_test_count
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="usertestcountId != null" >
+        usertestcount_id,
+      </if>
+      <if test="test1count != null" >
+        test1count,
+      </if>
+      <if test="test1rightcount != null" >
+        test1rightcount,
+      </if>
+      <if test="test2count != null" >
+        test2count,
+      </if>
+      <if test="test2rightcount != null" >
+        test2rightcount,
+      </if>
+      <if test="test3count != null" >
+        test3count,
+      </if>
+      <if test="test3rightcount != null" >
+        test3rightcount,
+      </if>
+      <if test="test4count != null" >
+        test4count,
+      </if>
+      <if test="test4rightcount != null" >
+        test4rightcount,
+      </if>
+      <if test="testcount != null" >
+        testcount,
+      </if>
+      <if test="testrightcount != null" >
+        testrightcount,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="usertestcountId != null" >
+        #{usertestcountId,jdbcType=INTEGER},
+      </if>
+      <if test="test1count != null" >
+        #{test1count,jdbcType=INTEGER},
+      </if>
+      <if test="test1rightcount != null" >
+        #{test1rightcount,jdbcType=INTEGER},
+      </if>
+      <if test="test2count != null" >
+        #{test2count,jdbcType=INTEGER},
+      </if>
+      <if test="test2rightcount != null" >
+        #{test2rightcount,jdbcType=INTEGER},
+      </if>
+      <if test="test3count != null" >
+        #{test3count,jdbcType=INTEGER},
+      </if>
+      <if test="test3rightcount != null" >
+        #{test3rightcount,jdbcType=INTEGER},
+      </if>
+      <if test="test4count != null" >
+        #{test4count,jdbcType=INTEGER},
+      </if>
+      <if test="test4rightcount != null" >
+        #{test4rightcount,jdbcType=INTEGER},
+      </if>
+      <if test="testcount != null" >
+        #{testcount,jdbcType=INTEGER},
+      </if>
+      <if test="testrightcount != null" >
+        #{testrightcount,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zlcook.iqas.ios.bean.UserTestCountExample" resultType="java.lang.Integer" >
+    select count(*) from user_test_count
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_test_count
+    <set >
+      <if test="record.usertestcountId != null" >
+        usertestcount_id = #{record.usertestcountId,jdbcType=INTEGER},
+      </if>
+      <if test="record.test1count != null" >
+        test1count = #{record.test1count,jdbcType=INTEGER},
+      </if>
+      <if test="record.test1rightcount != null" >
+        test1rightcount = #{record.test1rightcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.test2count != null" >
+        test2count = #{record.test2count,jdbcType=INTEGER},
+      </if>
+      <if test="record.test2rightcount != null" >
+        test2rightcount = #{record.test2rightcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.test3count != null" >
+        test3count = #{record.test3count,jdbcType=INTEGER},
+      </if>
+      <if test="record.test3rightcount != null" >
+        test3rightcount = #{record.test3rightcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.test4count != null" >
+        test4count = #{record.test4count,jdbcType=INTEGER},
+      </if>
+      <if test="record.test4rightcount != null" >
+        test4rightcount = #{record.test4rightcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.testcount != null" >
+        testcount = #{record.testcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.testrightcount != null" >
+        testrightcount = #{record.testrightcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_test_count
+    set usertestcount_id = #{record.usertestcountId,jdbcType=INTEGER},
+      test1count = #{record.test1count,jdbcType=INTEGER},
+      test1rightcount = #{record.test1rightcount,jdbcType=INTEGER},
+      test2count = #{record.test2count,jdbcType=INTEGER},
+      test2rightcount = #{record.test2rightcount,jdbcType=INTEGER},
+      test3count = #{record.test3count,jdbcType=INTEGER},
+      test3rightcount = #{record.test3rightcount,jdbcType=INTEGER},
+      test4count = #{record.test4count,jdbcType=INTEGER},
+      test4rightcount = #{record.test4rightcount,jdbcType=INTEGER},
+      testcount = #{record.testcount,jdbcType=INTEGER},
+      testrightcount = #{record.testrightcount,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlcook.iqas.ios.bean.UserTestCount" >
+    update user_test_count
+    <set >
+      <if test="test1count != null" >
+        test1count = #{test1count,jdbcType=INTEGER},
+      </if>
+      <if test="test1rightcount != null" >
+        test1rightcount = #{test1rightcount,jdbcType=INTEGER},
+      </if>
+      <if test="test2count != null" >
+        test2count = #{test2count,jdbcType=INTEGER},
+      </if>
+      <if test="test2rightcount != null" >
+        test2rightcount = #{test2rightcount,jdbcType=INTEGER},
+      </if>
+      <if test="test3count != null" >
+        test3count = #{test3count,jdbcType=INTEGER},
+      </if>
+      <if test="test3rightcount != null" >
+        test3rightcount = #{test3rightcount,jdbcType=INTEGER},
+      </if>
+      <if test="test4count != null" >
+        test4count = #{test4count,jdbcType=INTEGER},
+      </if>
+      <if test="test4rightcount != null" >
+        test4rightcount = #{test4rightcount,jdbcType=INTEGER},
+      </if>
+      <if test="testcount != null" >
+        testcount = #{testcount,jdbcType=INTEGER},
+      </if>
+      <if test="testrightcount != null" >
+        testrightcount = #{testrightcount,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where usertestcount_id = #{usertestcountId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlcook.iqas.ios.bean.UserTestCount" >
+    update user_test_count
+    set test1count = #{test1count,jdbcType=INTEGER},
+      test1rightcount = #{test1rightcount,jdbcType=INTEGER},
+      test2count = #{test2count,jdbcType=INTEGER},
+      test2rightcount = #{test2rightcount,jdbcType=INTEGER},
+      test3count = #{test3count,jdbcType=INTEGER},
+      test3rightcount = #{test3rightcount,jdbcType=INTEGER},
+      test4count = #{test4count,jdbcType=INTEGER},
+      test4rightcount = #{test4rightcount,jdbcType=INTEGER},
+      testcount = #{testcount,jdbcType=INTEGER},
+      testrightcount = #{testrightcount,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER}
+    where usertestcount_id = #{usertestcountId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlcook.iqas.ios.mapper.UserResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.zlcook.iqas.ios.bean.UserResource" >
+    <id column="user_resource_id" property="userResourceId" jdbcType="INTEGER" />
+    <result column="learncount" property="learncount" jdbcType="INTEGER" />
+    <result column="learntimenow" property="learntimenow" jdbcType="INTEGER" />
+    <result column="learntimes" property="learntimes" jdbcType="INTEGER" />
+    <result column="r_type" property="rType" jdbcType="INTEGER" />
+    <result column="resource_id" property="resourceId" jdbcType="INTEGER" />
+    <result column="rlogin_time" property="rloginTime" jdbcType="TIMESTAMP" />
+    <result column="rlogout_time" property="rlogoutTime" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="word" property="word" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_resource_id, learncount, learntimenow, learntimes, r_type, resource_id, rlogin_time, 
+    rlogout_time, user_id, word
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zlcook.iqas.ios.bean.UserResourceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_resource
+    where user_resource_id = #{userResourceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_resource
+    where user_resource_id = #{userResourceId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zlcook.iqas.ios.bean.UserResourceExample" >
+    delete from user_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zlcook.iqas.ios.bean.UserResource" >
+    insert into user_resource (user_resource_id, learncount, learntimenow, 
+      learntimes, r_type, resource_id, 
+      rlogin_time, rlogout_time, user_id, 
+      word)
+    values (#{userResourceId,jdbcType=INTEGER}, #{learncount,jdbcType=INTEGER}, #{learntimenow,jdbcType=INTEGER}, 
+      #{learntimes,jdbcType=INTEGER}, #{rType,jdbcType=INTEGER}, #{resourceId,jdbcType=INTEGER}, 
+      #{rloginTime,jdbcType=TIMESTAMP}, #{rlogoutTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, 
+      #{word,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlcook.iqas.ios.bean.UserResource" >
+    insert into user_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userResourceId != null" >
+        user_resource_id,
+      </if>
+      <if test="learncount != null" >
+        learncount,
+      </if>
+      <if test="learntimenow != null" >
+        learntimenow,
+      </if>
+      <if test="learntimes != null" >
+        learntimes,
+      </if>
+      <if test="rType != null" >
+        r_type,
+      </if>
+      <if test="resourceId != null" >
+        resource_id,
+      </if>
+      <if test="rloginTime != null" >
+        rlogin_time,
+      </if>
+      <if test="rlogoutTime != null" >
+        rlogout_time,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="word != null" >
+        word,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userResourceId != null" >
+        #{userResourceId,jdbcType=INTEGER},
+      </if>
+      <if test="learncount != null" >
+        #{learncount,jdbcType=INTEGER},
+      </if>
+      <if test="learntimenow != null" >
+        #{learntimenow,jdbcType=INTEGER},
+      </if>
+      <if test="learntimes != null" >
+        #{learntimes,jdbcType=INTEGER},
+      </if>
+      <if test="rType != null" >
+        #{rType,jdbcType=INTEGER},
+      </if>
+      <if test="resourceId != null" >
+        #{resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="rloginTime != null" >
+        #{rloginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rlogoutTime != null" >
+        #{rlogoutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="word != null" >
+        #{word,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zlcook.iqas.ios.bean.UserResourceExample" resultType="java.lang.Integer" >
+    select count(*) from user_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_resource
+    <set >
+      <if test="record.userResourceId != null" >
+        user_resource_id = #{record.userResourceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.learncount != null" >
+        learncount = #{record.learncount,jdbcType=INTEGER},
+      </if>
+      <if test="record.learntimenow != null" >
+        learntimenow = #{record.learntimenow,jdbcType=INTEGER},
+      </if>
+      <if test="record.learntimes != null" >
+        learntimes = #{record.learntimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.rType != null" >
+        r_type = #{record.rType,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceId != null" >
+        resource_id = #{record.resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rloginTime != null" >
+        rlogin_time = #{record.rloginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rlogoutTime != null" >
+        rlogout_time = #{record.rlogoutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.word != null" >
+        word = #{record.word,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_resource
+    set user_resource_id = #{record.userResourceId,jdbcType=INTEGER},
+      learncount = #{record.learncount,jdbcType=INTEGER},
+      learntimenow = #{record.learntimenow,jdbcType=INTEGER},
+      learntimes = #{record.learntimes,jdbcType=INTEGER},
+      r_type = #{record.rType,jdbcType=INTEGER},
+      resource_id = #{record.resourceId,jdbcType=INTEGER},
+      rlogin_time = #{record.rloginTime,jdbcType=TIMESTAMP},
+      rlogout_time = #{record.rlogoutTime,jdbcType=TIMESTAMP},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      word = #{record.word,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlcook.iqas.ios.bean.UserResource" >
+    update user_resource
+    <set >
+      <if test="learncount != null" >
+        learncount = #{learncount,jdbcType=INTEGER},
+      </if>
+      <if test="learntimenow != null" >
+        learntimenow = #{learntimenow,jdbcType=INTEGER},
+      </if>
+      <if test="learntimes != null" >
+        learntimes = #{learntimes,jdbcType=INTEGER},
+      </if>
+      <if test="rType != null" >
+        r_type = #{rType,jdbcType=INTEGER},
+      </if>
+      <if test="resourceId != null" >
+        resource_id = #{resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="rloginTime != null" >
+        rlogin_time = #{rloginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rlogoutTime != null" >
+        rlogout_time = #{rlogoutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="word != null" >
+        word = #{word,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_resource_id = #{userResourceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlcook.iqas.ios.bean.UserResource" >
+    update user_resource
+    set learncount = #{learncount,jdbcType=INTEGER},
+      learntimenow = #{learntimenow,jdbcType=INTEGER},
+      learntimes = #{learntimes,jdbcType=INTEGER},
+      r_type = #{rType,jdbcType=INTEGER},
+      resource_id = #{resourceId,jdbcType=INTEGER},
+      rlogin_time = #{rloginTime,jdbcType=TIMESTAMP},
+      rlogout_time = #{rlogoutTime,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER},
+      word = #{word,jdbcType=VARCHAR}
+    where user_resource_id = #{userResourceId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlcook.iqas.ios.mapper.UserCardMapper" >
+  <resultMap id="BaseResultMap" type="com.zlcook.iqas.ios.bean.UserCard" >
+    <id column="usercard_id" property="usercardId" jdbcType="INTEGER" />
+    <result column="cardclick1" property="cardclick1" jdbcType="INTEGER" />
+    <result column="cardclick2" property="cardclick2" jdbcType="INTEGER" />
+    <result column="cardclick3" property="cardclick3" jdbcType="INTEGER" />
+    <result column="cardclick4" property="cardclick4" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    usercard_id, cardclick1, cardclick2, cardclick3, cardclick4, user_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zlcook.iqas.ios.bean.UserCardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_card
+    where usercard_id = #{usercardId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_card
+    where usercard_id = #{usercardId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zlcook.iqas.ios.bean.UserCardExample" >
+    delete from user_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zlcook.iqas.ios.bean.UserCard" >
+    insert into user_card (usercard_id, cardclick1, cardclick2, 
+      cardclick3, cardclick4, user_id
+      )
+    values (#{usercardId,jdbcType=INTEGER}, #{cardclick1,jdbcType=INTEGER}, #{cardclick2,jdbcType=INTEGER}, 
+      #{cardclick3,jdbcType=INTEGER}, #{cardclick4,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlcook.iqas.ios.bean.UserCard" >
+    insert into user_card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="usercardId != null" >
+        usercard_id,
+      </if>
+      <if test="cardclick1 != null" >
+        cardclick1,
+      </if>
+      <if test="cardclick2 != null" >
+        cardclick2,
+      </if>
+      <if test="cardclick3 != null" >
+        cardclick3,
+      </if>
+      <if test="cardclick4 != null" >
+        cardclick4,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="usercardId != null" >
+        #{usercardId,jdbcType=INTEGER},
+      </if>
+      <if test="cardclick1 != null" >
+        #{cardclick1,jdbcType=INTEGER},
+      </if>
+      <if test="cardclick2 != null" >
+        #{cardclick2,jdbcType=INTEGER},
+      </if>
+      <if test="cardclick3 != null" >
+        #{cardclick3,jdbcType=INTEGER},
+      </if>
+      <if test="cardclick4 != null" >
+        #{cardclick4,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zlcook.iqas.ios.bean.UserCardExample" resultType="java.lang.Integer" >
+    select count(*) from user_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_card
+    <set >
+      <if test="record.usercardId != null" >
+        usercard_id = #{record.usercardId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardclick1 != null" >
+        cardclick1 = #{record.cardclick1,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardclick2 != null" >
+        cardclick2 = #{record.cardclick2,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardclick3 != null" >
+        cardclick3 = #{record.cardclick3,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardclick4 != null" >
+        cardclick4 = #{record.cardclick4,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_card
+    set usercard_id = #{record.usercardId,jdbcType=INTEGER},
+      cardclick1 = #{record.cardclick1,jdbcType=INTEGER},
+      cardclick2 = #{record.cardclick2,jdbcType=INTEGER},
+      cardclick3 = #{record.cardclick3,jdbcType=INTEGER},
+      cardclick4 = #{record.cardclick4,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlcook.iqas.ios.bean.UserCard" >
+    update user_card
+    <set >
+      <if test="cardclick1 != null" >
+        cardclick1 = #{cardclick1,jdbcType=INTEGER},
+      </if>
+      <if test="cardclick2 != null" >
+        cardclick2 = #{cardclick2,jdbcType=INTEGER},
+      </if>
+      <if test="cardclick3 != null" >
+        cardclick3 = #{cardclick3,jdbcType=INTEGER},
+      </if>
+      <if test="cardclick4 != null" >
+        cardclick4 = #{cardclick4,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where usercard_id = #{usercardId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlcook.iqas.ios.bean.UserCard" >
+    update user_card
+    set cardclick1 = #{cardclick1,jdbcType=INTEGER},
+      cardclick2 = #{cardclick2,jdbcType=INTEGER},
+      cardclick3 = #{cardclick3,jdbcType=INTEGER},
+      cardclick4 = #{cardclick4,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER}
+    where usercard_id = #{usercardId,jdbcType=INTEGER}
+  </update>
+</mapper>

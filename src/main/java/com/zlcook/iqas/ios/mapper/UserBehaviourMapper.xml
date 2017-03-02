@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlcook.iqas.ios.mapper.UserBehaviourMapper" >
+  <resultMap id="BaseResultMap" type="com.zlcook.iqas.ios.bean.UserBehaviour" >
+    <id column="user_behaviour_id" property="userBehaviourId" jdbcType="INTEGER" />
+    <result column="dowhat" property="dowhat" jdbcType="VARCHAR" />
+    <result column="dowhen" property="dowhen" jdbcType="TIMESTAMP" />
+    <result column="dowhere" property="dowhere" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_behaviour_id, dowhat, dowhen, dowhere, user_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zlcook.iqas.ios.bean.UserBehaviourExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_behaviour
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_behaviour
+    where user_behaviour_id = #{userBehaviourId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_behaviour
+    where user_behaviour_id = #{userBehaviourId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zlcook.iqas.ios.bean.UserBehaviourExample" >
+    delete from user_behaviour
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zlcook.iqas.ios.bean.UserBehaviour" >
+    insert into user_behaviour (user_behaviour_id, dowhat, dowhen, 
+      dowhere, user_id)
+    values (#{userBehaviourId,jdbcType=INTEGER}, #{dowhat,jdbcType=VARCHAR}, #{dowhen,jdbcType=TIMESTAMP}, 
+      #{dowhere,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlcook.iqas.ios.bean.UserBehaviour" >
+    insert into user_behaviour
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userBehaviourId != null" >
+        user_behaviour_id,
+      </if>
+      <if test="dowhat != null" >
+        dowhat,
+      </if>
+      <if test="dowhen != null" >
+        dowhen,
+      </if>
+      <if test="dowhere != null" >
+        dowhere,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userBehaviourId != null" >
+        #{userBehaviourId,jdbcType=INTEGER},
+      </if>
+      <if test="dowhat != null" >
+        #{dowhat,jdbcType=VARCHAR},
+      </if>
+      <if test="dowhen != null" >
+        #{dowhen,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dowhere != null" >
+        #{dowhere,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zlcook.iqas.ios.bean.UserBehaviourExample" resultType="java.lang.Integer" >
+    select count(*) from user_behaviour
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_behaviour
+    <set >
+      <if test="record.userBehaviourId != null" >
+        user_behaviour_id = #{record.userBehaviourId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dowhat != null" >
+        dowhat = #{record.dowhat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dowhen != null" >
+        dowhen = #{record.dowhen,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dowhere != null" >
+        dowhere = #{record.dowhere,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_behaviour
+    set user_behaviour_id = #{record.userBehaviourId,jdbcType=INTEGER},
+      dowhat = #{record.dowhat,jdbcType=VARCHAR},
+      dowhen = #{record.dowhen,jdbcType=TIMESTAMP},
+      dowhere = #{record.dowhere,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlcook.iqas.ios.bean.UserBehaviour" >
+    update user_behaviour
+    <set >
+      <if test="dowhat != null" >
+        dowhat = #{dowhat,jdbcType=VARCHAR},
+      </if>
+      <if test="dowhen != null" >
+        dowhen = #{dowhen,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dowhere != null" >
+        dowhere = #{dowhere,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_behaviour_id = #{userBehaviourId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlcook.iqas.ios.bean.UserBehaviour" >
+    update user_behaviour
+    set dowhat = #{dowhat,jdbcType=VARCHAR},
+      dowhen = #{dowhen,jdbcType=TIMESTAMP},
+      dowhere = #{dowhere,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER}
+    where user_behaviour_id = #{userBehaviourId,jdbcType=INTEGER}
+  </update>
+</mapper>

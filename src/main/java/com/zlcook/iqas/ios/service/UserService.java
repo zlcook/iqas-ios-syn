@@ -1,5 +1,6 @@
 package com.zlcook.iqas.ios.service;
 
+import com.zlcook.iqas.ios.dto.LoginDTO;
 import com.zlcook.iqas.ios.form.RegisterForm;
 import com.zlcook.iqas.ios.model.User;
 
@@ -10,11 +11,6 @@ import com.zlcook.iqas.ios.model.User;
 */
 public interface UserService {
 
-	public User getByUserId(Integer id);
-	
-	public User getByLoginName(String loginName);
-	
-	public boolean existUser(String loginName);
 	
 	/**
 	 * User注册方法，根据form进行注册，并返回状态码。
@@ -26,4 +22,13 @@ public interface UserService {
 	 * -1：注册用户已存在
 	 */
 	public int register(RegisterForm form);
+	
+	/**
+	 * User登录，并返回登录信息，该方法中会对参数进行校验。
+	 * @param loginName  登录名
+	 * @param password 登录密码
+	 * @return
+	 * 登录信息
+	 */
+	public LoginDTO login(String loginName,String password);
 }

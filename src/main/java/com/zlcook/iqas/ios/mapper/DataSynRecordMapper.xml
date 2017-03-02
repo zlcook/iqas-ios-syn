@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlcook.iqas.ios.mapper.DataSynRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.zlcook.iqas.ios.bean.DataSynRecord" >
+    <id column="syn_id" property="synId" jdbcType="INTEGER" />
+    <result column="last_mod_time" property="lastModTime" jdbcType="BIGINT" />
+    <result column="last_syn_time" property="lastSynTime" jdbcType="BIGINT" />
+    <result column="size" property="size" jdbcType="BIGINT" />
+    <result column="syn_table" property="synTable" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    syn_id, last_mod_time, last_syn_time, size, syn_table, user_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zlcook.iqas.ios.bean.DataSynRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from data_syn_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from data_syn_record
+    where syn_id = #{synId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from data_syn_record
+    where syn_id = #{synId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zlcook.iqas.ios.bean.DataSynRecordExample" >
+    delete from data_syn_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zlcook.iqas.ios.bean.DataSynRecord" >
+    insert into data_syn_record (syn_id, last_mod_time, last_syn_time, 
+      size, syn_table, user_id
+      )
+    values (#{synId,jdbcType=INTEGER}, #{lastModTime,jdbcType=BIGINT}, #{lastSynTime,jdbcType=BIGINT}, 
+      #{size,jdbcType=BIGINT}, #{synTable,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlcook.iqas.ios.bean.DataSynRecord" >
+    insert into data_syn_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="synId != null" >
+        syn_id,
+      </if>
+      <if test="lastModTime != null" >
+        last_mod_time,
+      </if>
+      <if test="lastSynTime != null" >
+        last_syn_time,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="synTable != null" >
+        syn_table,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="synId != null" >
+        #{synId,jdbcType=INTEGER},
+      </if>
+      <if test="lastModTime != null" >
+        #{lastModTime,jdbcType=BIGINT},
+      </if>
+      <if test="lastSynTime != null" >
+        #{lastSynTime,jdbcType=BIGINT},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=BIGINT},
+      </if>
+      <if test="synTable != null" >
+        #{synTable,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zlcook.iqas.ios.bean.DataSynRecordExample" resultType="java.lang.Integer" >
+    select count(*) from data_syn_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update data_syn_record
+    <set >
+      <if test="record.synId != null" >
+        syn_id = #{record.synId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastModTime != null" >
+        last_mod_time = #{record.lastModTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastSynTime != null" >
+        last_syn_time = #{record.lastSynTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.size != null" >
+        size = #{record.size,jdbcType=BIGINT},
+      </if>
+      <if test="record.synTable != null" >
+        syn_table = #{record.synTable,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update data_syn_record
+    set syn_id = #{record.synId,jdbcType=INTEGER},
+      last_mod_time = #{record.lastModTime,jdbcType=BIGINT},
+      last_syn_time = #{record.lastSynTime,jdbcType=BIGINT},
+      size = #{record.size,jdbcType=BIGINT},
+      syn_table = #{record.synTable,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlcook.iqas.ios.bean.DataSynRecord" >
+    update data_syn_record
+    <set >
+      <if test="lastModTime != null" >
+        last_mod_time = #{lastModTime,jdbcType=BIGINT},
+      </if>
+      <if test="lastSynTime != null" >
+        last_syn_time = #{lastSynTime,jdbcType=BIGINT},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=BIGINT},
+      </if>
+      <if test="synTable != null" >
+        syn_table = #{synTable,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where syn_id = #{synId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlcook.iqas.ios.bean.DataSynRecord" >
+    update data_syn_record
+    set last_mod_time = #{lastModTime,jdbcType=BIGINT},
+      last_syn_time = #{lastSynTime,jdbcType=BIGINT},
+      size = #{size,jdbcType=BIGINT},
+      syn_table = #{synTable,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER}
+    where syn_id = #{synId,jdbcType=INTEGER}
+  </update>
+</mapper>

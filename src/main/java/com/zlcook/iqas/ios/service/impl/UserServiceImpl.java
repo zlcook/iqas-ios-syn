@@ -1,20 +1,16 @@
 package com.zlcook.iqas.ios.service.impl;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zlcook.iqas.ios.bean.User;
-import com.zlcook.iqas.ios.bean.UserExample;
 import com.zlcook.iqas.ios.dao.UserDao;
 import com.zlcook.iqas.ios.dto.LoginDTO;
 import com.zlcook.iqas.ios.form.RegisterForm;
-import com.zlcook.iqas.ios.mapper.UserMapper;
+import com.zlcook.iqas.ios.service.TokenService;
 import com.zlcook.iqas.ios.service.UserService;
-import com.zlcook.iqas.ios.unitl.TokenUtils;
 
 /**
 * @author 周亮 
@@ -28,6 +24,8 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private TokenService tokenService;
 	@Override
 	public int register(RegisterForm form) {
 		User user = new User();
@@ -61,7 +59,7 @@ public class UserServiceImpl implements UserService {
 			return loginDTO;
 		}
 		//生成token值
-		String token =TokenUtils.generatorToken();
+		String token =tokenService.generatorToken4User(loginName);
 		existUser.setToken(token);
 		
 		//更新用户
@@ -76,11 +74,18 @@ public class UserServiceImpl implements UserService {
 	}
 	
 
-
 	public UserDao getUserDao() {
 		return userDao;
 	}
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
+
+	public TokenService getTokenService() {
+		return tokenService;
+	}
+	public void setTokenService(TokenService tokenService) {
+		this.tokenService = tokenService;
+	}
+	
 }

@@ -7,11 +7,13 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.zlcook.iqas.ios.dto.LoginDTO;
 import com.zlcook.iqas.ios.enums.ResponseStateEnum;
@@ -30,7 +32,7 @@ import com.zlcook.iqas.ios.vo.LoginVO;
 public class UserManagerController {
 	//日志类
 	private final Logger logger = org.apache.log4j.LogManager.getLogger(UserManagerController.class);
-		
+	
 	
 	/**
 	 * User服务类
@@ -67,7 +69,7 @@ public class UserManagerController {
 	 * 将BaseStatusVO<LoginVO>对象的所有属性以json格式返回
 	 * 
 	 */
-	@RequestMapping(value="/login",produces="application/json; charset=UTF-8", method=RequestMethod.POST)
+	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public BaseStatusVO<LoginVO> login(@RequestParam(required=true)String loginName,@RequestParam(required=true)String password){
 		
 		BaseStatusVO<LoginVO> status=new BaseStatusVO<LoginVO>(ResponseStateEnum.SUCCESS);

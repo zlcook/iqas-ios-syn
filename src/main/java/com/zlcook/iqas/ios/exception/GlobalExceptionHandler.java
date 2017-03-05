@@ -28,13 +28,26 @@ import com.zlcook.iqas.ios.vo.BaseStatusVO;
 /**
 * @author 周亮 
 * @version 创建时间：2017年3月2日 下午9:39:08
-* springmvn中全局异常处理器
+* springmvc中全局异常处理器
 */
 @ControllerAdvice
 @ResponseBody
 @SuppressWarnings("rawtypes")
 public class GlobalExceptionHandler {
 	 private static Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+	 
+	 
+	 
+	 /**
+	   * Token无效异常
+	   */
+	  //@ResponseStatus(HttpStatus.BAD_REQUEST)
+	  @ExceptionHandler(TokenInvalidException.class)
+	  public BaseStatusVO handleTokenInvalidException(TokenInvalidException e) {
+	    logger.info("token无效");
+	    return new BaseStatusVO<>(ResponseStateEnum.TOKEN_INVALID);
+	  }
+	 
 	/**
 	   * 400 - Bad Request
 	   */
@@ -111,17 +124,17 @@ public class GlobalExceptionHandler {
 	  /**
 	   * 404 - Not Found
 	   */
-	 // @ResponseStatus(HttpStatus.NOT_FOUND)
+	  @ResponseStatus(HttpStatus.NOT_FOUND)
 	  @ExceptionHandler(NoHandlerFoundException.class)
 	  public BaseStatusVO handleNoHandlerFoundException(NoHandlerFoundException e) {
 	    logger.error("方法不存在", e);
 	    return new BaseStatusVO<>(ResponseStateEnum.NOT_FOUND);
 	  }
-
+      
 	  /**
 	   * 404 - Not Found
 	   */
-	 // @ResponseStatus(HttpStatus.NOT_FOUND)
+	  @ResponseStatus(HttpStatus.NOT_FOUND)
 	  @ExceptionHandler(NoSuchRequestHandlingMethodException.class)
 	  public BaseStatusVO handleNoSuchRequestHandlingMethodException(NoSuchRequestHandlingMethodException e) {
 	    logger.error("方法不存在", e);
@@ -169,7 +182,7 @@ public class GlobalExceptionHandler {
 	  }
 
 	  /**
-	   * 500 - Internal Server Error
+	   * 1000 - Internal Server Error
 	   */
 	 // @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	  @ExceptionHandler(Exception.class)

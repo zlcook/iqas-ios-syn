@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.zlcook.iqas.ios.bean.User;
 import com.zlcook.iqas.ios.bean.UserExample;
+import com.zlcook.iqas.ios.dao.AbstractBaseDao;
 import com.zlcook.iqas.ios.dao.UserDao;
 import com.zlcook.iqas.ios.mapper.UserMapper;
 
@@ -16,11 +17,15 @@ import com.zlcook.iqas.ios.mapper.UserMapper;
 * UserDao的实现类
 */
 @Repository("userDao")
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl extends AbstractBaseDao<UserMapper, User> implements UserDao{
+
+	public UserDaoImpl(UserMapper entityMapper) {
+		super(entityMapper);
+	}
 
 	/**
 	 * 引入userMapper数据访问类，该类是mybatis提供了操作数据库的user映射类
-	 */
+	 *//*
 	@Autowired
 	private UserMapper userMapper;
 	
@@ -48,17 +53,17 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public long count() {
+	public int count() {
 		// TODO Auto-generated method stub
 		return userMapper.countByExample(null);
 	}
-
+*/
 	@Override
 	public User getByLoginName(String loginName) {
 		// TODO Auto-generated method stub
 		UserExample userExample = new UserExample();
 		userExample.createCriteria().andLoginNameEqualTo(loginName);
-		List<User> listUser =userMapper.selectByExample(userExample);
+		List<User> listUser =entityMapper.selectByExample(userExample);
 		if( listUser !=null && listUser.size()> 0)
 			return listUser.get(0);
 		return null;

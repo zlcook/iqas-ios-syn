@@ -8,7 +8,7 @@ import java.util.List;
 * 数据持久层接口
 * 该接口定义了Dao层接口常见的方法，为此如果一个Dao接口想要定义这些方法，可以直接继承该方法，泛型T代表的是Dao操作的实体了
 */
-public interface AbstractDao<T> {
+public interface BaseDao<T> {
 	
 	/**
 	 * 通过T的id进行查找，找不到返回null,方法不会对参数进行校验
@@ -16,18 +16,18 @@ public interface AbstractDao<T> {
 	 * @return
 	 * 返回查找到的T,否则返回null
 	 */
-	public T getById(Integer id);
+	 T getById(Integer id);
 	/**
 	 * 返回T集合，结果不为null
 	 * @return
 	 */
-	public List<T> list();
+	 List<T> list();
 	/**
 	 * 保存entity实体,并返回返回受影响记录条数
 	 * @param entity 要保存的实体对象
 	 * @return  返回受影响记录条数
 	 */
-	public int save(T entity);
+	 int save(T entity);
 	
 	/**
 	 * 更新实体,实体的id必须要存在
@@ -35,12 +35,12 @@ public interface AbstractDao<T> {
 	 * @return 
 	 * 返回受影响记录条数
 	 */
-	public int update(T entity);
+	 int update(T entity);
 	
 	/**
 	 * 获取记录总数
 	 * @return
 	 */
-	public long count();
+	 int count();
 	
 }

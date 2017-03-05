@@ -16,6 +16,7 @@ public enum ResponseStateEnum {
 	 */
 	SUCCESS(1,"success"),
 
+	
 	/**
 	 * 常见的请求异常
 	 */
@@ -40,6 +41,11 @@ public enum ResponseStateEnum {
 	 */
 	
 	PARAM_ERROR(1002,"参数有误!"),
+
+	/**
+	 * token值无效
+	 */
+	TOKEN_INVALID(1003,"token值无效"),
 	
 	USER_EXIST(2000,"用户已存在"),
 	

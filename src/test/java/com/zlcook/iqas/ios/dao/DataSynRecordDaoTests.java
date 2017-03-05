@@ -20,25 +20,7 @@ import com.zlcook.iqas.ios.bean.User;
 public class DataSynRecordDaoTests {
 	@Autowired
 	private DataSynRecordDao dataSynRecordDao;
-	/**
-	 * 保存
-	 */
-	@Test
-	public void save(){
-		DataSynRecord entity = new DataSynRecord();
-		entity.setSynId(1);
-		entity.setUserId(1);
-		entity.setSynTable("user");
-		entity.setLastModTime(10L);
-		entity.setLastSynTime(9L);
-		entity.setSize(1000L);
-		
-		int saveResult =dataSynRecordDao.save(entity);
-		if( saveResult ==1 )
-			System.out.println("保存成功");
-		else
-			System.out.println("保存失败");
-	}
+	
 	/**
 	 * 查找，根据id查找
 	 */

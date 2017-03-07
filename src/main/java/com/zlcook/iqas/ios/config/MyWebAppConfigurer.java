@@ -1,21 +1,33 @@
 package com.zlcook.iqas.ios.config;
 
+import java.util.Properties;
+
+import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.zlcook.iqas.ios.interceptors.TokenValidInterceptor;
 import com.zlcook.iqas.ios.service.TokenService;
 
 /**
 * @author 周亮 
 * @version 创建时间：2017年3月3日 下午2:20:15
-* 项目配置类
+* 项目配置类,配置了拦截器，mybatis等
 */
 @Configuration
+@MapperScan("com.zlcook.iqas.ios.mapper")
 public class MyWebAppConfigurer extends WebMvcConfigurerAdapter {
-
+	
 	/**
 	 * token服务，负责处理token相关业务
 	 */
@@ -39,5 +51,4 @@ public class MyWebAppConfigurer extends WebMvcConfigurerAdapter {
 		this.tokenService = tokenService;
 	}
 
-	
 }

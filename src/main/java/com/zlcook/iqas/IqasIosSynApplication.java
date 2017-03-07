@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan("com.zlcook.iqas.ios.mapper")
 public class IqasIosSynApplication {
 
 	public static void main(String[] args) {

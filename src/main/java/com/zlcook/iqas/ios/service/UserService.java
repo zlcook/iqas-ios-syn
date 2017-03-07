@@ -1,8 +1,8 @@
 package com.zlcook.iqas.ios.service;
 
+import com.zlcook.iqas.ios.bean.User;
 import com.zlcook.iqas.ios.dto.LoginDTO;
 import com.zlcook.iqas.ios.form.RegisterForm;
-import com.zlcook.iqas.ios.model.User;
 
 /**
 * @author 周亮 
@@ -31,4 +31,12 @@ public interface UserService {
 	 * 登录信息
 	 */
 	public LoginDTO login(String loginName,String password);
+	/**
+	 * 通过用户名查找用户
+	 * @param loginName ,如果该参数不为null，会去掉两端的空格再使用
+	 * @return
+	 * 返回查找到的用户，找不到返回null
+	 */
+	public User getByLoginName(String loginName);
+	
 }

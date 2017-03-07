@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 		User user = new User();
 		BeanUtils.copyProperties(form, user);
 		
-		User existUser =userDao.getByLoginName(form.getLoginName());
+		User existUser =getByLoginName(form.getLoginName());
 		if( existUser !=null )
 			return -1;
 		try{
@@ -72,6 +72,15 @@ public class UserServiceImpl implements UserService {
 		loginDTO.setStatus(1);
 		return loginDTO;
 	}
+
+	@Override
+	public User getByLoginName(String loginName) {
+		// TODO Auto-generated method stub
+		if( loginName ==null || "".equals(loginName.trim()))
+			return null;
+		User existUser =userDao.getByLoginName(loginName.trim());
+		return existUser;
+	}
 	
 
 	public UserDao getUserDao() {
@@ -87,5 +96,5 @@ public class UserServiceImpl implements UserService {
 	public void setTokenService(TokenService tokenService) {
 		this.tokenService = tokenService;
 	}
-	
+
 }

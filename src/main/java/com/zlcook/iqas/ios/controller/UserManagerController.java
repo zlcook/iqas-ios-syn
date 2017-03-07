@@ -1,20 +1,21 @@
 package com.zlcook.iqas.ios.controller;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
+import com.zlcook.iqas.ios.bean.User;
 import com.zlcook.iqas.ios.dto.LoginDTO;
 import com.zlcook.iqas.ios.enums.ResponseStateEnum;
 import com.zlcook.iqas.ios.form.RegisterForm;
@@ -46,19 +47,29 @@ public class UserManagerController {
 	 * @return  json格式字符串
 	 */
 	@RequestMapping(value="/register",produces="application/json; charset=UTF-8", method=RequestMethod.POST)
-	public  BaseStatusVO register( @Valid RegisterForm form,BindingResult bindingResult){
+	public  BaseStatusVO<Map<String,Integer>> register( @Valid RegisterForm form,BindingResult bindingResult){
 		
-		BaseStatusVO status=new BaseStatusVO(ResponseStateEnum.SUCCESS);
+		BaseStatusVO<Map<String,Integer>> status=new BaseStatusVO<Map<String,Integer>>(ResponseStateEnum.SUCCESS);
 		if( bindingResult.hasErrors()){
 			status.setStatuEnum(ResponseStateEnum.PARAM_ERROR);
 			return status;
 		}
 		int regResult =userService.register(form);
 		
-		if(regResult ==1)
+		if(regResult !=1)
+		{
+			status.setStatuEnum(ResponseStateEnum.USER_EXIST);
 			return status;
+		}
+		User user= userService.getByLoginName(form.getLoginName());
+		if(user!=null ){
+			Map<String,Integer> userIdMap = new HashMap<>();
+			userIdMap.put("userId", user.getUserId());
+			status.setData(userIdMap);
+		}
+		else
+			status.setStatuEnum(ResponseStateEnum.USER_EXIST);
 		
-		status.setStatuEnum(ResponseStateEnum.USER_EXIST);
 		return status;
 	}
 	/**

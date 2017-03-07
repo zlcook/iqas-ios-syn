@@ -1,21 +1,11 @@
 package com.zlcook.iqas.ios.config;
 
-import java.util.Properties;
-
-import javax.sql.DataSource;
-
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.zlcook.iqas.ios.interceptors.TokenValidInterceptor;
 import com.zlcook.iqas.ios.service.TokenService;
 

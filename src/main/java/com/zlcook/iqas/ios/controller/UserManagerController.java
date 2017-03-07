@@ -80,7 +80,7 @@ public class UserManagerController {
 	 * 将BaseStatusVO<LoginVO>对象的所有属性以json格式返回
 	 * 
 	 */
-	@RequestMapping(value="/login", method=RequestMethod.POST)
+	@RequestMapping(value="/login",produces="application/json; charset=UTF-8",method=RequestMethod.POST)
 	public BaseStatusVO<LoginVO> login(@RequestParam(required=true)String loginName,@RequestParam(required=true)String password){
 		
 		BaseStatusVO<LoginVO> status=new BaseStatusVO<LoginVO>(ResponseStateEnum.SUCCESS);

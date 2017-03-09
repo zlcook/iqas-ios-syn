@@ -44,6 +44,7 @@ public class GenericsUtils {
      */  
     @SuppressWarnings("unchecked")
 	public static Class getSuperClassGenricType(Class clazz) {
+    	
     	return getSuperClassGenricType(clazz,0);
     }
 	/**  

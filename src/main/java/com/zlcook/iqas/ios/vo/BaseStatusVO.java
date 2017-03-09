@@ -5,15 +5,15 @@ import com.zlcook.iqas.ios.enums.ResponseStateEnum;
 /**
 * @author 周亮 
 * @version 创建时间：2017年2月28日 下午8:45:29
-* 
+* 返回给移动端的json数据类型
 */
 public class BaseStatusVO<T> {
 	/**
-	 * 返回值元数据，用于指示此次请求的状态
+	 * 返回元数据，用于指示此次请求的状态
 	 */
 	private Meta meta;
 	/**
-	 * 返回数据
+	 * 返回数据，此处请求的数据，具体的格式根据T对象而定
 	 */
 	private T data;
 	

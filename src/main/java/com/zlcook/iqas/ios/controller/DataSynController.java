@@ -1,25 +1,21 @@
 package com.zlcook.iqas.ios.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSONObject;
 import com.zlcook.iqas.ios.bean.DataSynRecord;
+import com.zlcook.iqas.ios.dto.SynMetaDTO;
 import com.zlcook.iqas.ios.enums.ResponseStateEnum;
-import com.zlcook.iqas.ios.form.SynMetaForm;
+import com.zlcook.iqas.ios.form.RequestParams;
+import com.zlcook.iqas.ios.form.SynMetaJSON;
 import com.zlcook.iqas.ios.service.DataSynService;
 import com.zlcook.iqas.ios.service.TokenService;
 import com.zlcook.iqas.ios.vo.BaseStatusVO;
-import com.zlcook.iqas.ios.vo.SynTableMetaVO;
+import com.zlcook.iqas.ios.vo.SynMetaVO;
 
 
 /**
@@ -56,46 +52,48 @@ public class DataSynController {
         ]
        }
 	 */
-	@RequestMapping(value ="/listmetas",method=RequestMethod.POST)
-	public BaseStatusVO<List<SynTableMetaVO>> getSynMeta( String token,String jsonStr){
-		
-		/**
-		    "token":"wangerxiao:1231254",
-			"userId":10,
-			tablemeta:[
-			 {
-			      "synTable": "user",
-			      "userId": 1,
-			      “version":0,
-			      "lastModifyTime":null
+	/**
+	 * 处理用户发起同步请求，并返回要同步元数据
+	 * @param requestParams 用户携带参数,包括token和json两个字段，
+	 * 其中json字段接收json格式的数据，而且数据内容要符合SynMetaJSON类的属性，因为会根据json数据生成SynMetaJSON实体对象。
+	 *  json字段接收数据和下面类似
+		   {
+			  "userId":11,
+			  "tablemeta":[
+			    {
+			  	  "synId":1,
+			      "synTable":"user",
+			      "userId": 11,
+			      "version":0,
+			      "lastModTime":0
 			    }
-			]
-		 */
-		JSONObject json =JSONObject.parseObject(jsonStr);
-		 token =(String) json.get("token");
+			   ]
+			}
+	 * @return
+	 * 返回此次同步元数据
+	 * 
+	 */
+	@RequestMapping(value ="/listmetas",method=RequestMethod.POST)
+	public BaseStatusVO<SynMetaVO> getSynMeta(RequestParams<SynMetaJSON> requestParams){
+		
+		SynMetaJSON synTableMeta=(SynMetaJSON) requestParams.getObj(SynMetaJSON.class);
+		
 		//1.解析移动端元数据
-		 System.out.println("token:"+token+" : test:"+jsonStr);
-		 
-		 
+		Integer userId =synTableMeta.getUserId();
+		List<DataSynRecord> mobileTableMetas = synTableMeta.getTablemeta();
+		
 		//2.获取服务端的元数据
 		
+		List<DataSynRecord> serverTableMetas =dataSynService.listTableSynRecord(userId);
 		
 		//3.进行比对并返回同步元数据
+		SynMetaDTO synMetaDto= dataSynService.getSynMeta(serverTableMetas,mobileTableMetas);
 		
+		//4.返回给移动端json数据
+		SynMetaVO synMetaVO = new SynMetaVO(userId, synMetaDto.getUpsyntable(), synMetaDto.getDownsyntable());
 		
-		BaseStatusVO<List<SynTableMetaVO>> synMeta = new BaseStatusVO<>(ResponseStateEnum.SUCCESS); 
-		
-		Integer userId = 1;
-		//获取用户数据表同步记录
-		List<DataSynRecord> userSynRecordList =dataSynService.listTableSynRecord(userId);
-		
-		List<SynTableMetaVO> synTableMetaList = new ArrayList<>(userSynRecordList.size());
-		for(DataSynRecord ds : userSynRecordList){
-			SynTableMetaVO stv = new SynTableMetaVO();
-			BeanUtils.copyProperties(ds, stv);
-			synTableMetaList.add(stv);
-		}
-		synMeta.setData(synTableMetaList);
+		BaseStatusVO<SynMetaVO> synMeta = new BaseStatusVO<>(ResponseStateEnum.SUCCESS); 
+		synMeta.setData(synMetaVO);
 		
 		return synMeta;
 	}

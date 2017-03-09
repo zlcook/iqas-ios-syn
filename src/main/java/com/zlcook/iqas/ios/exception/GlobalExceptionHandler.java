@@ -37,6 +37,15 @@ public class GlobalExceptionHandler {
 	 private static Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 	 
 	 
+	 /**
+	   * json数据解析异常
+	   */
+	  //@ResponseStatus(HttpStatus.BAD_REQUEST)
+	  @ExceptionHandler(JSONDataParseException.class)
+	  public BaseStatusVO handleJSONDataParseException(JSONDataParseException e) {
+	    logger.info(e.getMessage());
+	    return new BaseStatusVO<>(ResponseStateEnum.JSON_DATA_ERROR);
+	  }
 	 
 	 /**
 	   * Token无效异常

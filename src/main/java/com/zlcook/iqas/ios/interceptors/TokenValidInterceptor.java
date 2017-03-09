@@ -29,11 +29,9 @@ public class TokenValidInterceptor implements HandlerInterceptor {
 		String token = null;
 		//请求内容类型
 		String contentType=request.getContentType();
-		System.out.println("contentType:"+contentType);
 		//发送的是json数据
 		if( contentType.contains("application/json")){
 			String charEncoding = request.getCharacterEncoding();
-			System.out.println("charEncoding:"+charEncoding);
 			//获取json数据
 			int contentLength = request.getContentLength();
 			if( contentLength <=0  )
@@ -47,8 +45,7 @@ public class TokenValidInterceptor implements HandlerInterceptor {
 			
 			String jsonStr = new String(buffer,charEncoding);
 			JSONObject json =JSONObject.parseObject(jsonStr);
-			 token =(String) json.get("token");
-			System.out.println("jsonStr:"+jsonStr+" : token:"+token);
+			token =(String) json.get("token");
 		}else{
 			token = request.getParameter("token");
 		}

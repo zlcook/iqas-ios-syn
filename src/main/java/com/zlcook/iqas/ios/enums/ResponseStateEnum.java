@@ -15,7 +15,18 @@ public enum ResponseStateEnum {
 	 * 成功
 	 */
 	SUCCESS(1,"success"),
+	/**
+	 * 自定义异常
+	 */
+	
+	PARAM_ERROR(3,"参数有误!"),
 
+	/**
+	 * token值无效
+	 */
+	TOKEN_INVALID(4,"token值无效"),
+	
+	JSON_DATA_ERROR(5,"json数据格式或者数据类型有误!"),
 	
 	/**
 	 * 常见的请求异常
@@ -36,16 +47,7 @@ public enum ResponseStateEnum {
 	
 	DATAINTEGRITY_VIOLATION_EXCEPTION(1001,"操作数据库出现异常"),
 	
-	/**
-	 * 自定义异常
-	 */
 	
-	PARAM_ERROR(1002,"参数有误!"),
-
-	/**
-	 * token值无效
-	 */
-	TOKEN_INVALID(1003,"token值无效"),
 	
 	USER_EXIST(2000,"用户已存在"),
 	

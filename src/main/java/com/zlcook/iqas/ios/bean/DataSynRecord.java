@@ -50,4 +50,11 @@ public class DataSynRecord {
     public void setVersion(Integer version) {
         this.version = version;
     }
+
+	@Override
+	public String toString() {
+		return "DataSynRecord [synId=" + synId + ", synTable=" + synTable + ", userId=" + userId + ", lastModTime="
+				+ lastModTime + ", version=" + version + "]";
+	}
+    
 }

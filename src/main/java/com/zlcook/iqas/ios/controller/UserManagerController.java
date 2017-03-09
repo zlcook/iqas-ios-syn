@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,6 +52,9 @@ public class UserManagerController {
 		
 		BaseStatusVO<Map<String,Integer>> status=new BaseStatusVO<Map<String,Integer>>(ResponseStateEnum.SUCCESS);
 		if( bindingResult.hasErrors()){
+			for(ObjectError error: bindingResult.getAllErrors()){
+				System.out.println(error.toString());
+			}
 			status.setStatuEnum(ResponseStateEnum.PARAM_ERROR);
 			return status;
 		}

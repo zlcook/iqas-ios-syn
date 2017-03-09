@@ -51,7 +51,7 @@ public enum ResponseStateEnum {
 	
 	USER_EXIST(2000,"用户已存在"),
 	
-	USER_LOGING_PARROR_ERROR(2001,"输出参数有误失败"),
+	USER_LOGING_PARROR_ERROR(2001,"输入参数有误失败"),
 	USER_LOGING_ERROR(2002,"用户登录失败");
 	
 	private int status;

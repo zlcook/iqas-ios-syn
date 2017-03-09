@@ -1,5 +1,9 @@
 package com.zlcook.iqas.ios.form;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,11 +22,14 @@ public class RequestParams<T extends JsonObjectAssert> {
 	/**
 	 * token值
 	 */
+	@NotNull
 	private String token;
 	/**
 	 * json数据，json数据的内容要T类中的属性相吻合。
 	 * 下面的getObj方法会根据该json数据转换成T的实例对象。
 	 */
+	@NotBlank(message="json不能为空")
+	@NotNull
 	private String json;
 	
 	public String getToken() {

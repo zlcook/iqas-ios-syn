@@ -2,7 +2,10 @@ package com.zlcook.iqas.ios.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.zlcook.iqas.ios.bean.DataSynRecord;
 import com.zlcook.iqas.ios.dto.SynMetaDTO;
 import com.zlcook.iqas.ios.enums.ResponseStateEnum;
+import com.zlcook.iqas.ios.exception.RequestParamersException;
 import com.zlcook.iqas.ios.form.RequestParams;
 import com.zlcook.iqas.ios.form.SynMetaJSON;
 import com.zlcook.iqas.ios.service.DataSynService;
@@ -74,8 +78,14 @@ public class DataSynController {
 	 * 
 	 */
 	@RequestMapping(value ="/listmetas",method=RequestMethod.POST)
-	public BaseStatusVO<SynMetaVO> getSynMeta(RequestParams<SynMetaJSON> requestParams){
+	public BaseStatusVO<SynMetaVO> getSynMeta( @Valid RequestParams<SynMetaJSON> requestParams,BindingResult bindingResult){
 		
+		BaseStatusVO<SynMetaVO> synMeta = new BaseStatusVO<>(ResponseStateEnum.SUCCESS); 
+		
+		if( bindingResult.hasErrors()){
+			synMeta.setStatuEnum(ResponseStateEnum.PARAM_ERROR);
+			return synMeta;
+		}
 		SynMetaJSON synTableMeta=(SynMetaJSON) requestParams.getObj(SynMetaJSON.class);
 		
 		//1.解析移动端元数据
@@ -91,8 +101,7 @@ public class DataSynController {
 		
 		//4.返回给移动端json数据
 		SynMetaVO synMetaVO = new SynMetaVO(userId, synMetaDto.getUpsyntable(), synMetaDto.getDownsyntable());
-		
-		BaseStatusVO<SynMetaVO> synMeta = new BaseStatusVO<>(ResponseStateEnum.SUCCESS); 
+	    //5.设置返回数据
 		synMeta.setData(synMetaVO);
 		
 		return synMeta;

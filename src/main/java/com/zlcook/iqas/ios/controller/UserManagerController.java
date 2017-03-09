@@ -52,9 +52,6 @@ public class UserManagerController {
 		
 		BaseStatusVO<Map<String,Integer>> status=new BaseStatusVO<Map<String,Integer>>(ResponseStateEnum.SUCCESS);
 		if( bindingResult.hasErrors()){
-			for(ObjectError error: bindingResult.getAllErrors()){
-				System.out.println(error.toString());
-			}
 			status.setStatuEnum(ResponseStateEnum.PARAM_ERROR);
 			return status;
 		}

@@ -38,6 +38,16 @@ public class GlobalExceptionHandler {
 	 
 	 
 	 /**
+	   * 请求参数异常：参数不存在,参数不满足要求
+	   */
+	  //@ResponseStatus(HttpStatus.BAD_REQUEST)
+	  @ExceptionHandler(RequestParamersException.class)
+	  public BaseStatusVO handleRequestParamersException(RequestParamersException e) {
+	    logger.info(e.getMessage());
+	    return new BaseStatusVO<>(ResponseStateEnum.PARAM_ERROR);
+	  }
+	 
+	 /**
 	   * json数据解析异常
 	   */
 	  //@ResponseStatus(HttpStatus.BAD_REQUEST)

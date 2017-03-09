@@ -2,7 +2,9 @@ package com.zlcook.iqas.ios.config;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -15,7 +17,6 @@ import com.zlcook.iqas.ios.service.TokenService;
 * 项目配置类,配置了拦截器，mybatis等
 */
 @Configuration
-@MapperScan("com.zlcook.iqas.ios.mapper")
 public class MyWebAppConfigurer extends WebMvcConfigurerAdapter {
 	
 	/**
@@ -33,6 +34,7 @@ public class MyWebAppConfigurer extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new TokenValidInterceptor(tokenService)).addPathPatterns("/datasyn/syn/*");
 		super.addInterceptors(registry);
 	}
+	
 	
 	public TokenService getTokenService() {
 		return tokenService;

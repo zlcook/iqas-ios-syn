@@ -25,7 +25,7 @@ public class DataSynRecordDaoImpl extends AbstractBaseDao<DataSynRecordMapper, D
 
 	@Override
 	public List<DataSynRecord> list(DataSynRecordExample example) {
-		// TODO Auto-generated method stub
+		
 		return entityMapper.selectByExample(example);
 	}
 

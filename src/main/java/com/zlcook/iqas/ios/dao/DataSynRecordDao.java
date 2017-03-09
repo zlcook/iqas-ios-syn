@@ -11,6 +11,12 @@ import com.zlcook.iqas.ios.bean.DataSynRecordExample;
 * 用户同步记录数据操作类，该接口定义了操作DatSynRecord实体了对应数据表的相关操作。
 */
 public interface DataSynRecordDao extends BaseDao<DataSynRecord>{
-
+	
+	/**
+	 * 查询元数据表集合
+	 * @param example 查询条件
+	 * @return 集合
+	 */
 	List<DataSynRecord> list(DataSynRecordExample example);
+	
 }

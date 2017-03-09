@@ -3,15 +3,13 @@ package com.zlcook.iqas.ios.bean;
 public class DataSynRecord {
     private Integer synId;
 
-    private Long lastModTime;
-
-    private Long lastSynTime;
-
-    private Long size;
-
     private String synTable;
 
     private Integer userId;
+
+    private Long lastModTime;
+
+    private Integer version;
 
     public Integer getSynId() {
         return synId;
@@ -19,30 +17,6 @@ public class DataSynRecord {
 
     public void setSynId(Integer synId) {
         this.synId = synId;
-    }
-
-    public Long getLastModTime() {
-        return lastModTime;
-    }
-
-    public void setLastModTime(Long lastModTime) {
-        this.lastModTime = lastModTime;
-    }
-
-    public Long getLastSynTime() {
-        return lastSynTime;
-    }
-
-    public void setLastSynTime(Long lastSynTime) {
-        this.lastSynTime = lastSynTime;
-    }
-
-    public Long getSize() {
-        return size;
-    }
-
-    public void setSize(Long size) {
-        this.size = size;
     }
 
     public String getSynTable() {
@@ -59,5 +33,21 @@ public class DataSynRecord {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Long getLastModTime() {
+        return lastModTime;
+    }
+
+    public void setLastModTime(Long lastModTime) {
+        this.lastModTime = lastModTime;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

@@ -18,6 +18,9 @@ public interface DataSynService {
 	 * 同步记录集合
 	 */
 	List<DataSynRecord> listTableSynRecord(Integer userId);
-	
-	
-}
+	/**
+	 * 根据用户账号初始化用户表元数据
+	 * @param userId  用户id
+	 */
+	void init4User(Integer userId);
+}   

@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zlcook.iqas.ios.bean.User;
+import com.zlcook.iqas.ios.dao.DataSynRecordDao;
 import com.zlcook.iqas.ios.dao.UserDao;
 import com.zlcook.iqas.ios.dto.LoginDTO;
 import com.zlcook.iqas.ios.form.RegisterForm;
+import com.zlcook.iqas.ios.service.DataSynService;
 import com.zlcook.iqas.ios.service.TokenService;
 import com.zlcook.iqas.ios.service.UserService;
 
@@ -26,6 +28,8 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 	@Autowired
 	private TokenService tokenService;
+	@Autowired
+	private DataSynService dataSynService;
 	@Override
 	public int register(RegisterForm form) {
 		User user = new User();
@@ -36,6 +40,11 @@ public class UserServiceImpl implements UserService {
 			return -1;
 		try{
 			userDao.save(user);
+
+			//初始化用户关于同步数据表的元数据表
+			User savedUser =getByLoginName(user.getLoginName());
+			dataSynService.init4User(savedUser.getUserId());
+			
 			return 1;
 		}catch(Exception e)
 		{

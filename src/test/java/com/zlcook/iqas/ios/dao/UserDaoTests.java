@@ -39,6 +39,13 @@ public class UserDaoTests {
 		if( user !=null )
 		   System.out.println(user.getLoginName()+" "+user.toString());	
 	}
+	
+	@Test
+	public void getByIdNoReflect(){
+		User user =userDao.getById(1);
+		if( user !=null )
+		   System.out.println(user.getLoginName()+" "+user.toString());	
+	}
 	/**
 	 * 查找，集合
 	 */

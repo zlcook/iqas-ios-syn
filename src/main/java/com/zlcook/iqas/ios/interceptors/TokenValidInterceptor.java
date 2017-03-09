@@ -6,11 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.zlcook.iqas.ios.enums.ResponseStateEnum;
+import com.alibaba.fastjson.JSONObject;
 import com.zlcook.iqas.ios.exception.TokenInvalidException;
 import com.zlcook.iqas.ios.service.TokenService;
-import com.zlcook.iqas.ios.vo.BaseStatusVO;
-
 /**
 * @author 周亮 
 * @version 创建时间：2017年3月3日 下午2:23:30
@@ -28,7 +26,33 @@ public class TokenValidInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		String token = request.getParameter("token");
+		String token = null;
+		//请求内容类型
+		String contentType=request.getContentType();
+		System.out.println("contentType:"+contentType);
+		//发送的是json数据
+		if( contentType.contains("application/json")){
+			String charEncoding = request.getCharacterEncoding();
+			System.out.println("charEncoding:"+charEncoding);
+			//获取json数据
+			int contentLength = request.getContentLength();
+			if( contentLength <=0  )
+				return false;
+			
+			byte[] buffer = new byte[contentLength];
+			
+			int readResult = request.getInputStream().read(buffer);
+			if( readResult ==-1)
+				return false;
+			
+			String jsonStr = new String(buffer,charEncoding);
+			JSONObject json =JSONObject.parseObject(jsonStr);
+			 token =(String) json.get("token");
+			System.out.println("jsonStr:"+jsonStr+" : token:"+token);
+		}else{
+			token = request.getParameter("token");
+		}
+		
 		if(!tokenService.isVaild(token))
 		{
 			//返回

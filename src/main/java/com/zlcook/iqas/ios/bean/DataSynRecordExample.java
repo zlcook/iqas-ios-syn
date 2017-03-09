@@ -164,186 +164,6 @@ public class DataSynRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andLastModTimeIsNull() {
-            addCriterion("last_mod_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastModTimeIsNotNull() {
-            addCriterion("last_mod_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastModTimeEqualTo(Long value) {
-            addCriterion("last_mod_time =", value, "lastModTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastModTimeNotEqualTo(Long value) {
-            addCriterion("last_mod_time <>", value, "lastModTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastModTimeGreaterThan(Long value) {
-            addCriterion("last_mod_time >", value, "lastModTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastModTimeGreaterThanOrEqualTo(Long value) {
-            addCriterion("last_mod_time >=", value, "lastModTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastModTimeLessThan(Long value) {
-            addCriterion("last_mod_time <", value, "lastModTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastModTimeLessThanOrEqualTo(Long value) {
-            addCriterion("last_mod_time <=", value, "lastModTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastModTimeIn(List<Long> values) {
-            addCriterion("last_mod_time in", values, "lastModTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastModTimeNotIn(List<Long> values) {
-            addCriterion("last_mod_time not in", values, "lastModTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastModTimeBetween(Long value1, Long value2) {
-            addCriterion("last_mod_time between", value1, value2, "lastModTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastModTimeNotBetween(Long value1, Long value2) {
-            addCriterion("last_mod_time not between", value1, value2, "lastModTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastSynTimeIsNull() {
-            addCriterion("last_syn_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastSynTimeIsNotNull() {
-            addCriterion("last_syn_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastSynTimeEqualTo(Long value) {
-            addCriterion("last_syn_time =", value, "lastSynTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastSynTimeNotEqualTo(Long value) {
-            addCriterion("last_syn_time <>", value, "lastSynTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastSynTimeGreaterThan(Long value) {
-            addCriterion("last_syn_time >", value, "lastSynTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastSynTimeGreaterThanOrEqualTo(Long value) {
-            addCriterion("last_syn_time >=", value, "lastSynTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastSynTimeLessThan(Long value) {
-            addCriterion("last_syn_time <", value, "lastSynTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastSynTimeLessThanOrEqualTo(Long value) {
-            addCriterion("last_syn_time <=", value, "lastSynTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastSynTimeIn(List<Long> values) {
-            addCriterion("last_syn_time in", values, "lastSynTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastSynTimeNotIn(List<Long> values) {
-            addCriterion("last_syn_time not in", values, "lastSynTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastSynTimeBetween(Long value1, Long value2) {
-            addCriterion("last_syn_time between", value1, value2, "lastSynTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastSynTimeNotBetween(Long value1, Long value2) {
-            addCriterion("last_syn_time not between", value1, value2, "lastSynTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andSizeIsNull() {
-            addCriterion("size is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSizeIsNotNull() {
-            addCriterion("size is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSizeEqualTo(Long value) {
-            addCriterion("size =", value, "size");
-            return (Criteria) this;
-        }
-
-        public Criteria andSizeNotEqualTo(Long value) {
-            addCriterion("size <>", value, "size");
-            return (Criteria) this;
-        }
-
-        public Criteria andSizeGreaterThan(Long value) {
-            addCriterion("size >", value, "size");
-            return (Criteria) this;
-        }
-
-        public Criteria andSizeGreaterThanOrEqualTo(Long value) {
-            addCriterion("size >=", value, "size");
-            return (Criteria) this;
-        }
-
-        public Criteria andSizeLessThan(Long value) {
-            addCriterion("size <", value, "size");
-            return (Criteria) this;
-        }
-
-        public Criteria andSizeLessThanOrEqualTo(Long value) {
-            addCriterion("size <=", value, "size");
-            return (Criteria) this;
-        }
-
-        public Criteria andSizeIn(List<Long> values) {
-            addCriterion("size in", values, "size");
-            return (Criteria) this;
-        }
-
-        public Criteria andSizeNotIn(List<Long> values) {
-            addCriterion("size not in", values, "size");
-            return (Criteria) this;
-        }
-
-        public Criteria andSizeBetween(Long value1, Long value2) {
-            addCriterion("size between", value1, value2, "size");
-            return (Criteria) this;
-        }
-
-        public Criteria andSizeNotBetween(Long value1, Long value2) {
-            addCriterion("size not between", value1, value2, "size");
-            return (Criteria) this;
-        }
-
         public Criteria andSynTableIsNull() {
             addCriterion("syn_table is null");
             return (Criteria) this;
@@ -471,6 +291,126 @@ public class DataSynRecordExample {
 
         public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
             addCriterion("user_id not between", value1, value2, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModTimeIsNull() {
+            addCriterion("last_mod_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModTimeIsNotNull() {
+            addCriterion("last_mod_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModTimeEqualTo(Long value) {
+            addCriterion("last_mod_time =", value, "lastModTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModTimeNotEqualTo(Long value) {
+            addCriterion("last_mod_time <>", value, "lastModTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModTimeGreaterThan(Long value) {
+            addCriterion("last_mod_time >", value, "lastModTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModTimeGreaterThanOrEqualTo(Long value) {
+            addCriterion("last_mod_time >=", value, "lastModTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModTimeLessThan(Long value) {
+            addCriterion("last_mod_time <", value, "lastModTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModTimeLessThanOrEqualTo(Long value) {
+            addCriterion("last_mod_time <=", value, "lastModTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModTimeIn(List<Long> values) {
+            addCriterion("last_mod_time in", values, "lastModTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModTimeNotIn(List<Long> values) {
+            addCriterion("last_mod_time not in", values, "lastModTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModTimeBetween(Long value1, Long value2) {
+            addCriterion("last_mod_time between", value1, value2, "lastModTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModTimeNotBetween(Long value1, Long value2) {
+            addCriterion("last_mod_time not between", value1, value2, "lastModTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionIsNull() {
+            addCriterion("version is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionIsNotNull() {
+            addCriterion("version is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionEqualTo(Integer value) {
+            addCriterion("version =", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionNotEqualTo(Integer value) {
+            addCriterion("version <>", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionGreaterThan(Integer value) {
+            addCriterion("version >", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionGreaterThanOrEqualTo(Integer value) {
+            addCriterion("version >=", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionLessThan(Integer value) {
+            addCriterion("version <", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionLessThanOrEqualTo(Integer value) {
+            addCriterion("version <=", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionIn(List<Integer> values) {
+            addCriterion("version in", values, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionNotIn(List<Integer> values) {
+            addCriterion("version not in", values, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionBetween(Integer value1, Integer value2) {
+            addCriterion("version between", value1, value2, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionNotBetween(Integer value1, Integer value2) {
+            addCriterion("version not between", value1, value2, "version");
             return (Criteria) this;
         }
     }

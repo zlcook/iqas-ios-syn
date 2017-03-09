@@ -35,6 +35,7 @@ public class TokenServiceImpl implements TokenService {
 	@Override
 	public boolean isVaild(String token) {
 		
+		System.out.println("token:"+token);
 		String loginName = getLoginNameFromToken(token);
 		if( loginName ==null )
 			return false;

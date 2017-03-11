@@ -50,7 +50,7 @@ public class RequestParams<T extends JsonObjectAssert> {
 	 * @return
 	 * 返回封装的T对象
 	 */
-	public  T getObj(Class<T> clazz){
+	public  T getObjFromJSON(Class<T> clazz){
 		try{
 			return JSON.parseObject(json,clazz);
 		}catch(Exception e){

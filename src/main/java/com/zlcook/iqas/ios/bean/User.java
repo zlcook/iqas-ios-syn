@@ -3,8 +3,6 @@ package com.zlcook.iqas.ios.bean;
 public class User {
     private Integer userId;
 
-    private String token;
-
     private Integer adaptive;
 
     private Integer classNum;
@@ -67,14 +65,6 @@ public class User {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token == null ? null : token.trim();
     }
 
     public Integer getAdaptive() {

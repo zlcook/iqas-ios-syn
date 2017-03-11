@@ -55,8 +55,8 @@ public class TokenValidInterceptor implements HandlerInterceptor {
 			//返回
 			throw new TokenInvalidException("token无效");
 		}
-		String loginName =tokenService.getLoginNameFromToken(token);
-		request.setAttribute("loginName", loginName);
+		/*Integer userId =tokenService.getUserIdFromToken(token);
+		request.setAttribute("userId", userId);*/
 		return true;
 	}
 

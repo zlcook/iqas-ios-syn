@@ -2,13 +2,17 @@ package com.zlcook.iqas.ios.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.zlcook.iqas.ios.bean.DataSynRecord;
 import com.zlcook.iqas.ios.dto.SynMetaDTO;
+import com.zlcook.iqas.ios.dto.SynTableData;
+import com.zlcook.iqas.ios.dto.SynTableName;
 
 /**
 * @author 周亮 
 * @version 创建时间：2017年3月3日 下午1:16:25
-* 
+* 数据同步服务
 */
 public interface DataSynService {
 	
@@ -23,14 +27,14 @@ public interface DataSynService {
 	public final static String SYN_USERWORD="userword";
 
 	/**
-	 * 获取用户所有数据表的同步情况
+	 * 获取用户所有同步表元数据
 	 * @param userId 用户id
 	 * @return
-	 * 同步记录集合
+	 * 同步表元数据集合
 	 */
 	List<DataSynRecord> listTableSynRecord(Integer userId);
 	/**
-	 * 根据用户账号初始化用户同步表的元数据表
+	 * 根据用户账号初始化用户同步表元数据
 	 * @param userId  用户id
 	 */
 	void init4User(Integer userId);
@@ -44,4 +48,21 @@ public interface DataSynService {
 	 *@return 返回需要同步的结果
 	 */
 	SynMetaDTO getSynMeta(List<DataSynRecord> serverTableMetas, List<DataSynRecord> mobileTableMetas);
+	/**
+	 * 更某个用户数据表中的数据
+	 * @param tableData 更新使用的数据
+	 * @param userId 用户id
+	 * @return
+	 * 更新成功返回true，否则返回false，方法具有事务性
+	 */
+	@Transactional
+	boolean updateSynTable(SynTableData tableData,Integer userId);
+	/**
+	 * 根据表名称和用户id获取该用户在该表中的所有数据
+	 * @param listTableName 表名称集合
+	 * @param userId 用户id
+	 * @return
+	 * 返回listTableName中对应表在该用户下的所有数据
+	 */
+	SynTableData getTableData(List<SynTableName> listTableName,Integer userId);
 }   

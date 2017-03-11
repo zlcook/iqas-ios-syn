@@ -19,4 +19,10 @@ public interface DataSynRecordDao extends BaseDao<DataSynRecord>{
 	 */
 	List<DataSynRecord> list(DataSynRecordExample example);
 	
+	/**
+	 * 更新同步表元数据表的版本，版本加1，同时最后修改时间为当前时间
+	 * @param userId  the id of User
+	 * @param tableName  the name of the modified meta table 
+	 */
+	void updateSynTableMetaVersion(Integer userId,String tableName);
 }

@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import com.zlcook.iqas.ios.bean.SynState;
 import com.zlcook.iqas.ios.bean.User;
-import com.zlcook.iqas.ios.dao.UserDao;
-import com.zlcook.iqas.ios.exception.RedisException;
+import com.zlcook.iqas.ios.dao.SynStateDao;
 import com.zlcook.iqas.ios.service.TokenService;
 import com.zlcook.iqas.ios.unitl.TokenUtils;
 
@@ -30,16 +30,16 @@ public class TokenServiceImpl implements TokenService {
 	 * 操作用户的数据访问接口
 	 */
 	@Autowired
-	private UserDao useDao;
+	private SynStateDao synStateDao;
 	
 	@Override
 	public boolean isVaild(String token) {
 		
-		String loginName = getLoginNameFromToken(token);
-		if( loginName ==null )
+		Integer userId = getUserIdFromToken(token);
+		if( userId ==null )
 			return false;
 		try {
-			Object tokenValue =stringRedisTemplate.opsForHash().get(TokenService.REDIS_HASHKEY_USER_TOKEN, loginName);
+			Object tokenValue =stringRedisTemplate.opsForHash().get(TokenService.REDIS_HASHKEY_USER_TOKEN, userId);
 			if( tokenValue !=null){
 				String value = (String)tokenValue;
 				return token.equals(value);
@@ -51,30 +51,31 @@ public class TokenServiceImpl implements TokenService {
 			//throw new RedisException("校验token值是否有效时访问redis出现异常");
 			
 			//绕过redis直接获取mysql数据库中的信息进行校验
-			User user =useDao.getByLoginName(loginName);
-			if( user ==null || !token.equals(user.getToken()) )
-				return false;
-			return true;
+			SynState state =synStateDao.getById(userId);
+			if( state !=null && token.equals(state.getToken()))
+				return true;
+			
+			return false;
 		}
 	}
 	
     
 	@Override
-	public String  getLoginNameFromToken(String token) {
+	public Integer  getUserIdFromToken(String token) {
 		if( token == null || "".equals(token.trim()) || !token.contains(":"))
 			return null;
-		//获取loginName
-		String loginName = token.split(":")[0];
+		//获取userId
+		String userId = token.split(":")[0];
 		
-		return loginName;
+		return Integer.parseInt(userId);
 	}
 	
 	
 	@Override
-	public String generatorToken4User(String loginName){
-		String tokenValue =loginName+":"+TokenUtils.generatorToken();
+	public String generatorToken4User(Integer userId){
+		String tokenValue =userId+":"+TokenUtils.generatorToken();
 		try {
-		stringRedisTemplate.opsForHash().put(TokenService.REDIS_HASHKEY_USER_TOKEN, loginName, tokenValue);
+		stringRedisTemplate.opsForHash().put(TokenService.REDIS_HASHKEY_USER_TOKEN, userId, tokenValue);
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error("将生成的token值保存redis数据库中出现异常:"+e.getMessage(),e);

@@ -85,12 +85,13 @@ public class UserManagerController {
 	public BaseStatusVO<LoginVO> login(@RequestParam(required=true)String loginName,@RequestParam(required=true)String password){
 		
 		BaseStatusVO<LoginVO> status=new BaseStatusVO<LoginVO>(ResponseStateEnum.SUCCESS);
-		
+		//1.登录
 		LoginDTO loginDTO =userService.login(loginName, password);
 		if( loginDTO.getStatus() != 1){
 			status.setStatuEnum(ResponseStateEnum.USER_LOGING_PARROR_ERROR);
 			return status;
 		}
+		//2.检查上一次登录后的同步情况
 		
 		LoginVO loginVO = new LoginVO();
 		BeanUtils.copyProperties(loginDTO, loginVO);

@@ -3,6 +3,7 @@ package com.zlcook.iqas.ios.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
 * @author 周亮 
 * @version 创建时间：2017年3月9日 下午4:33:53
@@ -11,44 +12,33 @@ import java.util.List;
 public class SynMetaDTO {
 	
 	/**
-	 * upsyntable:移动端->服务端，移动端需要上传的数据表的名称集合：通过比较得出，移动端拥有该数据表的最新数据，所以要上传到服务端。
+	 * upSynTable:移动端->服务端，移动端需要上传的数据表的名称集合：通过比较得出，移动端拥有该数据表的最新数据，所以要上传到服务端。
 	 */
-	private List<KeyValue> upsyntable;
+	private List<SynTableName> upSynTable;
 	/**
-	 * downsyntable:：服务端->移动端，移动端需要接收的数据表的名称集合：通过比较得出，服务端拥有该数据表的最新数据，所以移动端需要接收最新的数据。
+	 * downSynTable:：服务端->移动端，移动端需要接收的数据表的名称集合：通过比较得出，服务端拥有该数据表的最新数据，所以移动端需要接收最新的数据。
 	 */
-	private List<KeyValue> downsyntable;
+	private List<SynTableName> downSynTable;
 	
 	public SynMetaDTO() {
 		super();
-		upsyntable=new ArrayList<>();
-		downsyntable=new ArrayList<>();
+		upSynTable=new ArrayList<>();
+		downSynTable=new ArrayList<>();
 	}
-	public void putUpSynTableName(String tableName){
-		upsyntable.add(new KeyValue(tableName));
+	public List<SynTableName> getUpSynTable() {
+		return upSynTable;
 	}
+	public List<SynTableName> getDownSynTable() {
+		return downSynTable;
+	}
+
 	public void putDownSynTableName(String tableName){
-		downsyntable.add(new KeyValue(tableName));
+		downSynTable.add(new SynTableName(tableName));
 	}
-	public List<KeyValue> getUpsyntable() {
-		return upsyntable;
-	}
-	public List<KeyValue> getDownsyntable() {
-		return downsyntable;
+
+	public void putUpSynTableName(String tableName){
+		upSynTable.add(new SynTableName(tableName));
 	}
 	
-	public class KeyValue{
-		private String tableName;
-
-		public KeyValue(String tableName) {
-			super();
-			this.tableName = tableName;
-		}
-		public String getTableName() {
-			return tableName;
-		}
-		public void setTableName(String tableName) {
-			this.tableName = tableName;
-		}
-	}
+	
 }

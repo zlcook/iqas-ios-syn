@@ -29,4 +29,11 @@ public class DataSynRecordDaoImpl extends AbstractBaseDao<DataSynRecordMapper, D
 		return entityMapper.selectByExample(example);
 	}
 
+	@Override
+	public void updateSynTableMetaVersion(Integer userId, String tableName) {
+		// TODO Auto-generated method stub
+		entityMapper.updateSynTableMetaVersion(userId, tableName, System.currentTimeMillis());
+		
+	}
+
 }

@@ -7,11 +7,11 @@ import com.zlcook.iqas.ios.bean.DataSynRecord;
 /**
 * @author 周亮 
 * @version 创建时间：2017年3月8日 上午10:31:03
-* 请求同步元数据的表单，用户在请求同步时会填写该表单中的相关内容，服务端用该类来接收服务端的数据。
+* 用户在请求同步时会填写该实体类中的相关内容，服务端用该类来接收服务端的数据。
 * 
 			{
 			  "userId":11,
-			  "tablemeta":[
+			  "tableMeta":[
 			  {
 			  	  "synId":1,
 			      "synTable":"user",
@@ -35,7 +35,7 @@ public class SynMetaJSON implements JsonObjectAssert{
 	/**
 	 * 同步表元数据
 	 */
-	private List<DataSynRecord> tablemeta;
+	private List<DataSynRecord> tableMeta;
 
 	public Integer getUserId() {
 		return userId;
@@ -45,13 +45,12 @@ public class SynMetaJSON implements JsonObjectAssert{
 		this.userId = userId;
 	}
 
-	public List<DataSynRecord> getTablemeta() {
-		return tablemeta;
+	public List<DataSynRecord> getTableMeta() {
+		return tableMeta;
 	}
 
-	public void setTablemeta(List<DataSynRecord> tablemeta) {
-		this.tablemeta = tablemeta;
+	public void setTableMeta(List<DataSynRecord> tableMeta) {
+		this.tableMeta = tableMeta;
 	}
-	
 
 }

@@ -48,17 +48,31 @@ public enum ResponseStateEnum {
 	DATAINTEGRITY_VIOLATION_EXCEPTION(1001,"操作数据库出现异常"),
 	
 	
-	
 	USER_EXIST(2000,"用户已存在"),
-	
 	USER_LOGING_PARROR_ERROR(2001,"输入参数有误失败"),
-	USER_LOGING_ERROR(2002,"用户登录失败");
+	USER_LOGING_ERROR(2002,"用户登录失败"),
+	
+	
+	SYN_FAILURE(3000,"数据同步失败"),
+	
+	/**
+	 * 服务层操作出现异常
+	 */
+	SERVER_EXCEPTION(4000);  
 	
 	private int status;
 	private String message;
 	private ResponseStateEnum(int status, String message) {
 		this.status = status;
 		this.message = message;
+	}
+	private ResponseStateEnum(int status) {
+		this.status = status;
+	}
+	
+	public ResponseStateEnum setMessage(String message) {
+		this.message = message;
+		return this;
 	}
 	public int getStatus() {
 		return status;

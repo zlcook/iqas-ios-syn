@@ -17,21 +17,21 @@ public interface TokenService {
 	boolean isVaild(String token);
 
 	/**
-	 * 根据loginName生成token值。生成的token值格式必须符合*:*格式，
-	 * 即token值的前部分是参数loginName的值，后部分是冒号（:）加上字符串。
+	 * 根据userId生成token值。生成的token值格式必须符合*:*格式，
+	 * 即token值的前部分是参数userId的值，后部分是冒号（:）加上字符串。
 	 * 生成的token值会同时保存在redis中，
 	 * 在redis中使用hash类型存储用户的token值。
-	 * hash的键名：user:token ; 字段：参数loginName的值 ;字段值:生成的token值。
-	 * @param loginName 用户登录名，该方法不会对loginName进行校验，所以调用方法应该对该参数进行校验
+	 * hash的键名：user:token ; 字段：参数userId的值 ;字段值:生成的token值。
+	 * @param userId 用户登录名，该方法不会对userId进行校验，所以调用方法应该对该参数进行校验
 	 * @return
-	 * 返回生成的token值，符合格式lognName:*
+	 * 返回生成的token值，符合格式userId:*
 	 */
-	String generatorToken4User(String loginName);
+	String generatorToken4User(Integer userId);
 	/**
-	 * 从token中获取loginName
-	 * @param token token值，应该满足generatorToken4User(String loginName)方法生成的格式。
+	 * 从token中获取userId
+	 * @param token token值，应该满足generatorToken4User(Integer userId)方法生成的格式。
 	 * @return
-	 * 返回loginName的值，不存在则返回null
+	 * 返回userId的值，不存在则返回null
 	 */
-	String  getLoginNameFromToken(String token);
+	Integer  getUserIdFromToken(String token);
 }

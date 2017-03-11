@@ -2,7 +2,7 @@ package com.zlcook.iqas.ios.vo;
 
 import java.util.List;
 
-import com.zlcook.iqas.ios.dto.SynMetaDTO.KeyValue;
+import com.zlcook.iqas.ios.dto.SynTableName;
 
 /**
 * @author 周亮 
@@ -21,18 +21,19 @@ public class SynMetaVO {
 	/**
 	 * upsyntable:移动端->服务端，移动端需要上传的数据表的名称集合：通过比较得出，移动端拥有该数据表的最新数据，所以要上传到服务端。
 	 */
-	private List<KeyValue> upsyntable;
+	private List<SynTableName> upsyntable;
 	/**
 	 * downsyntable:：服务端->移动端，移动端需要接收的数据表的名称集合：通过比较得出，服务端拥有该数据表的最新数据，所以移动端需要接收最新的数据。
 	 */
-	private List<KeyValue> downsyntable;
+	private List<SynTableName> downsyntable;
 	
-	public SynMetaVO(Integer userId, List<KeyValue> upsyntable, List<KeyValue> downsyntable) {
+	public SynMetaVO(Integer userId, List<SynTableName> upsyntable, List<SynTableName> downsyntable) {
 		super();
 		this.userId = userId;
 		this.upsyntable = upsyntable;
 		this.downsyntable = downsyntable;
 		this.synTableCount= this.upsyntable.size()+this.downsyntable.size();
+		
 	}
 	public Integer getUserId() {
 		return userId;
@@ -44,16 +45,16 @@ public class SynMetaVO {
 		return synTableCount;
 	}
 	
-	public List<KeyValue> getUpsyntable() {
+	public List<SynTableName> getUpsyntable() {
 		return upsyntable;
 	}
-	public void setUpsyntable(List<KeyValue> upsyntable) {
+	public void setUpsyntable(List<SynTableName> upsyntable) {
 		this.upsyntable = upsyntable;
 	}
-	public List<KeyValue> getDownsyntable() {
+	public List<SynTableName> getDownsyntable() {
 		return downsyntable;
 	}
-	public void setDownsyntable(List<KeyValue> downsyntable) {
+	public void setDownsyntable(List<SynTableName> downsyntable) {
 		this.downsyntable = downsyntable;
 	}
 	

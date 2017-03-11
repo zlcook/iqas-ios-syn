@@ -77,6 +77,32 @@ public abstract class AbstractBaseDao<M,T> implements BaseDao<T> {
 	}
 
 	@Override
+	public <E> List<T> list(E example,Class<E> exampleClazz) {
+		try {
+			Method method = mapperClazz.getMethod("selectByExample",exampleClazz);//selectByExample
+			List<T> list =(List<T>) method.invoke(entityMapper, example);
+			if( list !=null )
+				return list;
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+
+		return new ArrayList<>();
+	}
+	@Override
 	public List<T> list() {
 		try {
 			Method method = mapperClazz.getMethod("selectByExample",entityExampleClazz);//selectByExample

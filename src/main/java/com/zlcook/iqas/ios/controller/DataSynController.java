@@ -12,14 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zlcook.iqas.ios.bean.DataSynRecord;
 import com.zlcook.iqas.ios.dto.SynMetaDTO;
+import com.zlcook.iqas.ios.dto.SynTableData;
 import com.zlcook.iqas.ios.enums.ResponseStateEnum;
-import com.zlcook.iqas.ios.exception.RequestParamersException;
 import com.zlcook.iqas.ios.form.RequestParams;
 import com.zlcook.iqas.ios.form.SynMetaJSON;
+import com.zlcook.iqas.ios.form.SynTableDataJSON;
 import com.zlcook.iqas.ios.service.DataSynService;
 import com.zlcook.iqas.ios.service.TokenService;
 import com.zlcook.iqas.ios.vo.BaseStatusVO;
 import com.zlcook.iqas.ios.vo.SynMetaVO;
+import com.zlcook.iqas.ios.vo.SynTableDataVO;
 
 
 /**
@@ -41,29 +43,15 @@ public class DataSynController {
 	 */
 	@Autowired
 	private TokenService tokenService;
+	
 	/**
-	 * 获取同步头
-	 * @return
-	 * {
-        "meta": {
-          "status": 1,
-          "message": "success"
-        },
-        "data":[
-        	{"synId":"1","lastModTime":"123243","lastSynTime":"12123","size":12132,"userId",1},
-        	{},
-        	{}
-        ]
-       }
-	 */
-	/**
-	 * 处理用户发起同步请求，并返回要同步元数据
+	 * 处理用户发起同步请求，并返回同步元数据
 	 * @param requestParams 用户携带参数,包括token和json两个字段，
 	 * 其中json字段接收json格式的数据，而且数据内容要符合SynMetaJSON类的属性，因为会根据json数据生成SynMetaJSON实体对象。
-	 *  json字段接收数据和下面类似
+	 *  json字段接收数据和下面类似，其中synTable的取值受限于：DataSynService中定义的实体名称
 		   {
 			  "userId":11,
-			  "tablemeta":[
+			  "tableMeta":[
 			    {
 			  	  "synId":1,
 			      "synTable":"user",
@@ -77,7 +65,7 @@ public class DataSynController {
 	 * 返回此次同步元数据
 	 * 
 	 */
-	@RequestMapping(value ="/listmetas",method=RequestMethod.POST)
+	@RequestMapping(value ="/synmetas",method=RequestMethod.POST)
 	public BaseStatusVO<SynMetaVO> getSynMeta( @Valid RequestParams<SynMetaJSON> requestParams,BindingResult bindingResult){
 		
 		BaseStatusVO<SynMetaVO> synMeta = new BaseStatusVO<>(ResponseStateEnum.SUCCESS); 
@@ -86,11 +74,12 @@ public class DataSynController {
 			synMeta.setStatuEnum(ResponseStateEnum.PARAM_ERROR);
 			return synMeta;
 		}
-		SynMetaJSON synTableMeta=(SynMetaJSON) requestParams.getObj(SynMetaJSON.class);
+		//0.解析得到json数据
+		SynMetaJSON synTableMeta=(SynMetaJSON) requestParams.getObjFromJSON(SynMetaJSON.class);
 		
 		//1.解析移动端元数据
 		Integer userId =synTableMeta.getUserId();
-		List<DataSynRecord> mobileTableMetas = synTableMeta.getTablemeta();
+		List<DataSynRecord> mobileTableMetas = synTableMeta.getTableMeta();
 		
 		//2.获取服务端的元数据
 		
@@ -100,13 +89,62 @@ public class DataSynController {
 		SynMetaDTO synMetaDto= dataSynService.getSynMeta(serverTableMetas,mobileTableMetas);
 		
 		//4.返回给移动端json数据
-		SynMetaVO synMetaVO = new SynMetaVO(userId, synMetaDto.getUpsyntable(), synMetaDto.getDownsyntable());
+		SynMetaVO synMetaVO = new SynMetaVO(userId, synMetaDto.getUpSynTable(), synMetaDto.getDownSynTable());
 	    //5.设置返回数据
 		synMeta.setData(synMetaVO);
 		
 		return synMeta;
 	}
 	
+	/**
+	 * 接收移动端上传的同步数据，并返回服务端下传的同步数据
+	 * @param requestParams
+	 * token="liang:1232423",
+	   json={
+	    "userId":11,
+		"downSynTable":[ { "synTable":"userCard"},...],    //服务端需要下传的数据表     
+		"tableData":{                                       //移动端传给服务端的数据               
+			"user":[{"userId":1,"loginName":"liang","grade":4,"leavel":1,...},...],//用户表的同步数据
+			"userCord":[{}],  
+			"userLearningStyle":[{}],
+			"userResource":[{}],
+			"userTestCount":[{}],
+			"userWord":[{}]
+		  }
+		}
+	 * @param bindingResult
+	 * @return
+	 */
+	@RequestMapping(value ="/syntabledata",method=RequestMethod.POST)
+	public BaseStatusVO<SynTableDataVO> receiveUpSynDataAndBackDownSynData( @Valid RequestParams<SynTableDataJSON> requestParams,BindingResult bindingResult){
+		
+		BaseStatusVO<SynTableDataVO> status = new BaseStatusVO<>(ResponseStateEnum.SUCCESS); 
+		if( bindingResult.hasErrors()){
+			status.setStatuEnum(ResponseStateEnum.PARAM_ERROR);
+			return status;
+		}
+		//0.解析得到json数据
+		SynTableDataJSON synTableData=(SynTableDataJSON) requestParams.getObjFromJSON(SynTableDataJSON.class);
+		//1.处理向上同步的表数据
+		  //1.1用移动端的数据更新服务端数据
+		boolean synResult =dataSynService.updateSynTable(synTableData.getTableData(),synTableData.getUserId());
+		if( !synResult ){
+			status.setStatuEnum(ResponseStateEnum.SYN_FAILURE);
+			return status;
+		}
+		
+		//2.获取要向下同步的的表数据
+	    SynTableData tableData= dataSynService.getTableData(synTableData.getDownSynTable(),synTableData.getUserId());
+		
+	    //3.获取用户的的数据表元数据
+	    List<DataSynRecord> tableMeta=dataSynService.listTableSynRecord(synTableData.getUserId());
+	    
+	    //4.返回给移动端
+	    SynTableDataVO synTableDataVo = new SynTableDataVO(tableMeta, tableData);
+	    status.setData(synTableDataVo);
+	    
+		return status;
+	}
 	
 	
 	

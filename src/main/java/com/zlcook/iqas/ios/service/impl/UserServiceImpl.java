@@ -5,8 +5,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zlcook.iqas.ios.bean.SynState;
 import com.zlcook.iqas.ios.bean.User;
 import com.zlcook.iqas.ios.dao.DataSynRecordDao;
+import com.zlcook.iqas.ios.dao.SynStateDao;
 import com.zlcook.iqas.ios.dao.UserDao;
 import com.zlcook.iqas.ios.dto.LoginDTO;
 import com.zlcook.iqas.ios.form.RegisterForm;
@@ -30,6 +32,10 @@ public class UserServiceImpl implements UserService {
 	private TokenService tokenService;
 	@Autowired
 	private DataSynService dataSynService;
+	
+	@Autowired
+	private SynStateDao synStateDao;
+	
 	@Override
 	public int register(RegisterForm form) {
 		User user = new User();
@@ -67,9 +73,17 @@ public class UserServiceImpl implements UserService {
 			loginDTO.setStatus(-1);
 			return loginDTO;
 		}
-		//生成token值
-		String token =tokenService.generatorToken4User(loginName);
-		existUser.setToken(token);
+		
+		//生成token值,移除到外部添加，当用户确认没有提示或者忽略提示才生产新的token
+		String token =tokenService.generatorToken4User(existUser.getUserId());
+		
+		//2.检查上一次登录后的同步情况
+		SynState lastSynState = synStateDao.getById(existUser.getUserId());
+		if( lastSynState!=null){
+		}
+		
+		
+		SynState synState = new SynState();
 		
 		//更新用户
 		if(userDao.update(existUser) !=1 ){

@@ -98,6 +98,7 @@ public class DataSynServiceImpl implements DataSynService {
 		for(int i=0;i< count;i++ ){
 			DataSynRecord serverDr = serverTableMetas.get(i);
 			String tableName =serverDr.getSynTable();
+			//获取移动端中名称相同的表
 			DataSynRecord mobileDr =getTargetFromList(mobileTableMetas,tableName);
 			
 			if( mobileDr ==null ||  serverDr.getVersion() != mobileDr.getVersion()){
@@ -129,7 +130,7 @@ public class DataSynServiceImpl implements DataSynService {
 		if( tableMetas ==null || tableMetas.size()<=0)
 		   return null;
 		for( DataSynRecord dr : tableMetas)
-			if( tableName.equals(dr.getSynTable()))
+			if( tableName.equalsIgnoreCase(dr.getSynTable()))
 				return dr;
 		return null;
 	}
@@ -198,42 +199,42 @@ public class DataSynServiceImpl implements DataSynService {
 				String name =tableName.getSynTable();
 				if(name ==null )
 					continue;
-				if( name.equals(DataSynService.SYN_USER) ){
+				if( name.equalsIgnoreCase(DataSynService.SYN_USER) ){
 					UserExample example = new UserExample();
 					example.createCriteria().andUserIdEqualTo(userId);
 					List<User> synTableDatas=userDao.list(example,UserExample.class);
 					synTableData.setUser(synTableDatas);
 					continue;
 				}
-				if( name.equals(DataSynService.SYN_USERCARD) ){
+				if( name.equalsIgnoreCase(DataSynService.SYN_USERCARD) ){
 					UserCardExample example = new UserCardExample();
 					example.createCriteria().andUserIdEqualTo(userId);
 					List<UserCard> synTableDatas=userCardDao.list(example,UserCardExample.class);
 					synTableData.setUserCard(synTableDatas);
 					continue;
 				}
-				if( name.equals(DataSynService.SYN_USERLEARNINGSTYLE) ){
+				if( name.equalsIgnoreCase(DataSynService.SYN_USERLEARNINGSTYLE) ){
 					UserLearningStyleExample example = new UserLearningStyleExample();
 					example.createCriteria().andUserIdEqualTo(userId);
 					List<UserLearningStyle> synTableDatas=userLearningStyleDao.list(example,UserLearningStyleExample.class);
 					synTableData.setUserLearningStyle(synTableDatas);
 					continue;
 				}
-				if( name.equals(DataSynService.SYN_USERRESOURCE) ){
+				if( name.equalsIgnoreCase(DataSynService.SYN_USERRESOURCE) ){
 					UserResourceExample example = new UserResourceExample();
 					example.createCriteria().andUserIdEqualTo(userId);
 					List<UserResource> synTableDatas=userResourceDao.list(example,UserResourceExample.class);
 					synTableData.setUserResource(synTableDatas);
 					continue;
 				}
-				if( name.equals(DataSynService.SYN_USERTESTCOUNT) ){
+				if( name.equalsIgnoreCase(DataSynService.SYN_USERTESTCOUNT) ){
 					UserTestCountExample example = new UserTestCountExample();
 					example.createCriteria().andUserIdEqualTo(userId);
 					List<UserTestCount> synTableDatas=userTestCountDao.list(example,UserTestCountExample.class);
 					synTableData.setUserTestCount(synTableDatas);
 					continue;
 				}
-				if( name.equals(DataSynService.SYN_USERWORD) ){
+				if( name.equalsIgnoreCase(DataSynService.SYN_USERWORD) ){
 					UserWordExample example = new UserWordExample();
 					example.createCriteria().andUserIdEqualTo(userId);
 					List<UserWord> synTableDatas=userWordDao.list(example,UserWordExample.class);

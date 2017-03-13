@@ -10,6 +10,8 @@ import com.zlcook.iqas.ios.enums.SynStateEnum;
 */
 public class LoginVO  {
 	
+	private Integer userId;
+	
 	private String token;
 	/**
 	 * 同步标识
@@ -45,6 +47,14 @@ public class LoginVO  {
 	}
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	
 }

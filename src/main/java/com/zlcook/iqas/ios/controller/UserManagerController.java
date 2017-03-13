@@ -118,6 +118,7 @@ public class UserManagerController {
 		//3.返回同步结果
 		loginVO.setSynState(synStateEnum);
 		loginVO.setToken(loginDTO.getToken());
+		loginVO.setUserId(loginDTO.getUserId());
 		status.setData(loginVO);
 		return status;
 	}

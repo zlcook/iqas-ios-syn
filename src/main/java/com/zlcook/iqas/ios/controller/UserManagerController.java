@@ -7,13 +7,13 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zlcook.iqas.ios.bean.SynState;
 import com.zlcook.iqas.ios.bean.User;
 import com.zlcook.iqas.ios.dto.LoginDTO;
 import com.zlcook.iqas.ios.enums.ResponseStateEnum;
@@ -99,8 +99,21 @@ public class UserManagerController {
 			return status;
 		}
 		//2.检查上一次登录后的同步情况
-		SynStateEnum synStateEnum = synStateService.getSynResult(loginDTO.getUserId(), loginForm.getSynDevice());
+		SynState synState =synStateService.getById(loginDTO.getUserId());
 		
+		SynStateEnum synStateEnum =null;
+		if( synState == null){
+			synState.setSynCount(0);
+			synState.setSynDevice(loginForm.getSynDevice());
+			synState.setSynResult(true);
+			synState.setUserId(loginDTO.getUserId());
+			synState.setToken(loginDTO.getToken());
+			synStateService.save(synState);
+			
+			synStateEnum= SynStateEnum.SYN_SUCCESS;
+		}else{
+			 synStateEnum = synStateService.getSynResult(synState, loginForm.getSynDevice());
+		}
 		LoginVO loginVO = new LoginVO();
 		//3.返回同步结果
 		loginVO.setSynState(synStateEnum);

@@ -1,5 +1,6 @@
 package com.zlcook.iqas.ios.service;
 
+import com.zlcook.iqas.ios.bean.SynState;
 import com.zlcook.iqas.ios.enums.SynStateEnum;
 
 /**
@@ -10,13 +11,13 @@ import com.zlcook.iqas.ios.enums.SynStateEnum;
 public interface SynStateService {
 
 	/**
-	 * 判断用户在前一次登录的设备上的同步情况，结果有3个
-	 * @param userId   the id of user 
-	 * @param synDevice   the identify of device 
+	 * 根据同步状态获取同步结果，该方法不会对参数进行校验
+	 * @param synState 同步状态，不可以为null，该方法不会对参数进行校验
+	 * @param synDevice  the identify of device 
 	 * @return
 	 * 移动端数据同步状态
 	 */
-	SynStateEnum getSynResult(Integer userId,String synDevice);
+	SynStateEnum getSynResult(SynState synState,String synDevice);
 	/**
 	 * 设置开启本次同步
 	 * @param userId 
@@ -33,4 +34,15 @@ public interface SynStateService {
 	 * @param synDevice 设备标识
 	 */
 	void ignoreSynRemind(Integer userId,String synDevice) ;
+	/**
+	 * 保存
+	 * @param synState
+	 */
+	void save(SynState synState);
+	/**
+	 * 获取用户同步状态
+	 * @param userId
+	 * @return
+	 */
+	SynState getById(Integer userId);
 }

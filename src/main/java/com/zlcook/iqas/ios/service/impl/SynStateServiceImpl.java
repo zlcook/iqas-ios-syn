@@ -25,12 +25,8 @@ public class SynStateServiceImpl implements SynStateService {
 	private SynStateDao synStateDao;
 	
 	@Override
-	public SynStateEnum getSynResult(Integer userId, String synDevice) {
+	public SynStateEnum getSynResult(SynState synState,String synDevice) {
 		// TODO Auto-generated method stub
-		SynState synState = synStateDao.getById(userId);
-		if( synState == null ){
-			return  SynStateEnum.SYN_SUCCESS;
-		}
 		
 		if(  synState.getSynDevice() == null ){
 			initCurrentDeviceSynState(synState,synDevice);
@@ -103,5 +99,15 @@ public class SynStateServiceImpl implements SynStateService {
 		synState.setSynDevice(synDevice);
 		synState.setSynCount(0);
 		synStateDao.update(synState);
+	}
+	@Override
+	public void save(SynState synState) {
+		// TODO Auto-generated method stub
+		synStateDao.save(synState);
+	}
+	@Override
+	public SynState getById(Integer userId) {
+		// TODO Auto-generated method stub
+		return synStateDao.getById(userId);
 	}
 }

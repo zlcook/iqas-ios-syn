@@ -69,29 +69,26 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		User existUser =userDao.getByLoginName(loginName);
-		if( existUser==null || !password.equals(existUser.getPassword())){
+		if( existUser==null || !password.equals(existUser.getPassword()) ){
 			loginDTO.setStatus(-1);
 			return loginDTO;
 		}
-		
-		//生成token值,移除到外部添加，当用户确认没有提示或者忽略提示才生产新的token
-		String token =tokenService.generatorToken4User(existUser.getUserId());
-		
-		//2.检查上一次登录后的同步情况
-		SynState lastSynState = synStateDao.getById(existUser.getUserId());
-		if( lastSynState!=null){
+		Integer userId = existUser.getUserId();
+		//生成新的token值
+		String token =tokenService.generatorToken4User(userId);
+		SynState synState = synStateDao.getById(userId);
+		if( synState == null ){
+			synState = new SynState();
+			synState.setUserId(userId);
+			synState.setToken(token);
+			synStateDao.save(synState);
+		}else{
+			synState.setToken(token);
+			synStateDao.update(synState);
 		}
 		
-		
-		SynState synState = new SynState();
-		
-		//更新用户
-		if(userDao.update(existUser) !=1 ){
-			loginDTO.setStatus(0);
-			return loginDTO;
-		}
-		
-		BeanUtils.copyProperties(existUser, loginDTO);
+		loginDTO.setToken(token);
+		loginDTO.setUserId(userId);
 		loginDTO.setStatus(1);
 		return loginDTO;
 	}

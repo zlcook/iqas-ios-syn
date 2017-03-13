@@ -10,16 +10,17 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zlcook.iqas.ios.bean.User;
 import com.zlcook.iqas.ios.dto.LoginDTO;
 import com.zlcook.iqas.ios.enums.ResponseStateEnum;
+import com.zlcook.iqas.ios.enums.SynStateEnum;
+import com.zlcook.iqas.ios.form.LoginForm;
 import com.zlcook.iqas.ios.form.RegisterForm;
+import com.zlcook.iqas.ios.service.SynStateService;
 import com.zlcook.iqas.ios.service.UserService;
 import com.zlcook.iqas.ios.vo.BaseStatusVO;
 import com.zlcook.iqas.ios.vo.LoginVO;
@@ -41,6 +42,8 @@ public class UserManagerController {
 	 */
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private SynStateService synStateService;
 	/**
 	 * User注册方法
 	 * @param form User注册填写的信息
@@ -82,19 +85,26 @@ public class UserManagerController {
 	 * 
 	 */
 	@RequestMapping(value="/login",produces="application/json; charset=UTF-8",method=RequestMethod.POST)
-	public BaseStatusVO<LoginVO> login(@RequestParam(required=true)String loginName,@RequestParam(required=true)String password){
+	public BaseStatusVO<LoginVO> login(@Valid LoginForm loginForm,BindingResult bindingResult){
 		
 		BaseStatusVO<LoginVO> status=new BaseStatusVO<LoginVO>(ResponseStateEnum.SUCCESS);
+		if( bindingResult.hasErrors()){
+			status.setStatuEnum(ResponseStateEnum.USER_LOGING_PARROR_ERROR);
+			return status;
+		}
 		//1.登录
-		LoginDTO loginDTO =userService.login(loginName, password);
+		LoginDTO loginDTO =userService.login(loginForm.getLoginName(), loginForm.getPassword());
 		if( loginDTO.getStatus() != 1){
 			status.setStatuEnum(ResponseStateEnum.USER_LOGING_PARROR_ERROR);
 			return status;
 		}
 		//2.检查上一次登录后的同步情况
+		SynStateEnum synStateEnum = synStateService.getSynResult(loginDTO.getUserId(), loginForm.getSynDevice());
 		
 		LoginVO loginVO = new LoginVO();
-		BeanUtils.copyProperties(loginDTO, loginVO);
+		//3.返回同步结果
+		loginVO.setSynState(synStateEnum);
+		loginVO.setToken(loginDTO.getToken());
 		status.setData(loginVO);
 		return status;
 	}

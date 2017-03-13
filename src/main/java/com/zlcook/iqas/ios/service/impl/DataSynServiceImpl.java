@@ -32,6 +32,7 @@ import com.zlcook.iqas.ios.dto.SynMetaDTO;
 import com.zlcook.iqas.ios.dto.SynTableData;
 import com.zlcook.iqas.ios.dto.SynTableName;
 import com.zlcook.iqas.ios.service.DataSynService;
+import com.zlcook.iqas.ios.service.SynStateService;
 
 /**
 * @author 周亮 
@@ -56,6 +57,8 @@ public class DataSynServiceImpl implements DataSynService {
 	private UserResourceDao userResourceDao;
 	@Autowired
 	private UserWordDao userWordDao;
+	@Autowired
+	private SynStateService synStateService;
 	
 	@Override
 	public List<DataSynRecord> listTableSynRecord(Integer userId) {
@@ -183,6 +186,7 @@ public class DataSynServiceImpl implements DataSynService {
 			return false;
 			//throw new ServiceException(ResponseStateEnum.SERVER_EXCEPTION.setMessage("数据向上同步异常"));
 		}
+
 		return true;
 	}
 

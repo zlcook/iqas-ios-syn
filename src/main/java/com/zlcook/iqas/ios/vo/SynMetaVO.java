@@ -2,6 +2,7 @@ package com.zlcook.iqas.ios.vo;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zlcook.iqas.ios.dto.SynTableName;
 
 /**
@@ -13,6 +14,7 @@ public class SynMetaVO {
 	/**
 	 * 用户id
 	 */
+	@JsonIgnore
 	private Integer userId;
 	/**
 	 *  需要进行同步的表的数量，等于向上同步和向下同步的数据表之和

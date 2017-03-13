@@ -52,6 +52,8 @@ public enum ResponseStateEnum {
 	USER_LOGING_PARROR_ERROR(2001,"输入参数有误失败"),
 	USER_LOGING_ERROR(2002,"用户登录失败"),
 	
+	USER_USERID_INVALID(2004,"用户id无效"),
+	
 	
 	SYN_FAILURE(3000,"数据同步失败"),
 	

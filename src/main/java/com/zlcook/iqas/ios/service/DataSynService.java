@@ -51,7 +51,7 @@ public interface DataSynService {
 	/**
 	 * 更某个用户数据表中的数据
 	 * @param tableData 更新使用的数据
-	 * @param userId 用户id
+	 * @param userId 
 	 * @return
 	 * 更新成功返回true，否则返回false，方法具有事务性
 	 */

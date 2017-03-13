@@ -1,4 +1,8 @@
 package com.zlcook.iqas.ios.vo;
+
+import com.zlcook.iqas.ios.bean.User;
+import com.zlcook.iqas.ios.enums.SynStateEnum;
+
 /**
 * @author 周亮 
 * @version 创建时间：2017年3月2日 下午8:46:46
@@ -6,56 +10,36 @@ package com.zlcook.iqas.ios.vo;
 */
 public class LoginVO  {
 	
-	private Integer userId;
-	private String loginName;	
-	private String realName;
-	private Integer sex	;
-	private String school;
-	private String grade;
-	private Integer classNum;
 	private String token;
-	public Integer getUserId() {
-		return userId;
+	/**
+	 * 同步标识
+	 */
+	private Integer synFlage;
+	/**
+	 * 同步信息
+	 */
+	private String message;
+	
+	public void setSynState(SynStateEnum synStateEnum){
+		synFlage = synStateEnum.getSynFlage();
+		message = synStateEnum.getMessage();
 	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	
+	public Integer getSynFlage() {
+		return synFlage;
 	}
-	public String getLoginName() {
-		return loginName;
+
+	public void setSynFlage(Integer synFlage) {
+		this.synFlage = synFlage;
 	}
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
+
+	public String getMessage() {
+		return message;
 	}
-	public String getRealName() {
-		return realName;
+	public void setMessage(String message) {
+		this.message = message;
 	}
-	public void setRealName(String realName) {
-		this.realName = realName;
-	}
-	public Integer getSex() {
-		return sex;
-	}
-	public void setSex(Integer sex) {
-		this.sex = sex;
-	}
-	public String getSchool() {
-		return school;
-	}
-	public void setSchool(String school) {
-		this.school = school;
-	}
-	public String getGrade() {
-		return grade;
-	}
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
-	public Integer getClassNum() {
-		return classNum;
-	}
-	public void setClassNum(Integer classNum) {
-		this.classNum = classNum;
-	}
+	
 	public String getToken() {
 		return token;
 	}

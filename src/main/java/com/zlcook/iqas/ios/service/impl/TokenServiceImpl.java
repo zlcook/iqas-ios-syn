@@ -39,7 +39,7 @@ public class TokenServiceImpl implements TokenService {
 		if( userId ==null )
 			return false;
 		try {
-			Object tokenValue =stringRedisTemplate.opsForHash().get(TokenService.REDIS_HASHKEY_USER_TOKEN, userId);
+			Object tokenValue =stringRedisTemplate.opsForHash().get(TokenService.REDIS_HASHKEY_USER_TOKEN, userId+"");
 			if( tokenValue !=null){
 				String value = (String)tokenValue;
 				return token.equals(value);
@@ -75,7 +75,7 @@ public class TokenServiceImpl implements TokenService {
 	public String generatorToken4User(Integer userId){
 		String tokenValue =userId+":"+TokenUtils.generatorToken();
 		try {
-		stringRedisTemplate.opsForHash().put(TokenService.REDIS_HASHKEY_USER_TOKEN, userId, tokenValue);
+			stringRedisTemplate.opsForHash().put(TokenService.REDIS_HASHKEY_USER_TOKEN,userId+"", tokenValue);
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error("将生成的token值保存redis数据库中出现异常:"+e.getMessage(),e);

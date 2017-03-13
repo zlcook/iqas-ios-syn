@@ -14,7 +14,6 @@ import com.zlcook.iqas.ios.dto.SynTableName;
 * 该实体类就是用于接收同步数据使用的。移动端以json格式将数据传输过来，最后会将json数据转换为该类的实体对象。
 * 传过来的json数据格式如下：
 *      {
-	    "userId":11,
 		"downSynTable":[ { "synTable":"userCard"},...],    //向下同步的同步表名称：服务端需要下传的数据表     
 		"tableData":{                                       //移动端传给服务端的数据               
 			"user":[{"userId":1,"loginName":"liang","grade":4,"leavel":1,...},...],//用户表的同步数据

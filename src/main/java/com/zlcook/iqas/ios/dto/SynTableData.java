@@ -6,6 +6,7 @@ import com.zlcook.iqas.ios.bean.User;
 import com.zlcook.iqas.ios.bean.UserCard;
 import com.zlcook.iqas.ios.bean.UserLearningStyle;
 import com.zlcook.iqas.ios.bean.UserResource;
+import com.zlcook.iqas.ios.bean.UserTest;
 import com.zlcook.iqas.ios.bean.UserTestCount;
 import com.zlcook.iqas.ios.bean.UserWord;
 
@@ -20,7 +21,7 @@ public class SynTableData {
 	private List<UserCard> userCard;
 	private List<UserLearningStyle> userLearningStyle;
 	private List<UserResource> userResource;
-	private List<UserTestCount> userTestCount;
+	private List<UserTest> userTest;
 	private List<UserWord> userWord;
 	public List<User> getUser() {
 		return user;
@@ -46,11 +47,12 @@ public class SynTableData {
 	public void setUserResource(List<UserResource> userResource) {
 		this.userResource = userResource;
 	}
-	public List<UserTestCount> getUserTestCount() {
-		return userTestCount;
+	
+	public List<UserTest> getUserTest() {
+		return userTest;
 	}
-	public void setUserTestCount(List<UserTestCount> userTestCount) {
-		this.userTestCount = userTestCount;
+	public void setUserTest(List<UserTest> userTest) {
+		this.userTest = userTest;
 	}
 	public List<UserWord> getUserWord() {
 		return userWord;

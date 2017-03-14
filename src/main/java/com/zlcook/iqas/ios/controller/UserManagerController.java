@@ -65,14 +65,13 @@ public class UserManagerController {
 			status.setStatuEnum(ResponseStateEnum.USER_EXIST);
 			return status;
 		}
+		
 		User user= userService.getByLoginName(form.getLoginName());
 		if(user!=null ){
 			Map<String,Integer> userIdMap = new HashMap<>();
 			userIdMap.put("userId", user.getUserId());
 			status.setData(userIdMap);
 		}
-		else
-			status.setStatuEnum(ResponseStateEnum.USER_EXIST);
 		
 		return status;
 	}

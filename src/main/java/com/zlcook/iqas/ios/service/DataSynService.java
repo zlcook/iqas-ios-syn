@@ -23,7 +23,7 @@ public interface DataSynService {
 	public final static String SYN_USERCARD="Usercard";
 	public final static String SYN_USERLEARNINGSTYLE="Userlearningstyle";
 	public final static String SYN_USERRESOURCE="userresource";
-	public final static String SYN_USERTESTCOUNT="usertestcount";
+	public final static String SYN_USERTEST="usertest";
 	public final static String SYN_USERWORD="userword";
 
 	/**
@@ -34,7 +34,7 @@ public interface DataSynService {
 	 */
 	List<DataSynRecord> listTableSynRecord(Integer userId);
 	/**
-	 * 根据用户账号初始化用户同步表元数据
+	 * 根据用户账号初始化用户同步表元数据，该方法应该在用户注册完成后调用
 	 * @param userId  用户id
 	 */
 	void init4User(Integer userId);

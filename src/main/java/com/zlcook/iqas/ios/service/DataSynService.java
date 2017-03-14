@@ -20,8 +20,8 @@ public interface DataSynService {
 	 * 需要同步表对应实体类的名称
 	 */
 	public final static String SYN_USER="user";
-	public final static String SYN_USERCARD="usercard";
-	public final static String SYN_USERLEARNINGSTYLE="userlearningstyle";
+	public final static String SYN_USERCARD="Usercard";
+	public final static String SYN_USERLEARNINGSTYLE="Userlearningstyle";
 	public final static String SYN_USERRESOURCE="userresource";
 	public final static String SYN_USERTESTCOUNT="usertestcount";
 	public final static String SYN_USERWORD="userword";

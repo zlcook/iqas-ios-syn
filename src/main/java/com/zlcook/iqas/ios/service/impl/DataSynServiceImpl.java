@@ -17,8 +17,8 @@ import com.zlcook.iqas.ios.bean.UserLearningStyle;
 import com.zlcook.iqas.ios.bean.UserLearningStyleExample;
 import com.zlcook.iqas.ios.bean.UserResource;
 import com.zlcook.iqas.ios.bean.UserResourceExample;
-import com.zlcook.iqas.ios.bean.UserTestCount;
-import com.zlcook.iqas.ios.bean.UserTestCountExample;
+import com.zlcook.iqas.ios.bean.UserTest;
+import com.zlcook.iqas.ios.bean.UserTestExample;
 import com.zlcook.iqas.ios.bean.UserWord;
 import com.zlcook.iqas.ios.bean.UserWordExample;
 import com.zlcook.iqas.ios.dao.DataSynRecordDao;
@@ -26,7 +26,7 @@ import com.zlcook.iqas.ios.dao.UserCardDao;
 import com.zlcook.iqas.ios.dao.UserDao;
 import com.zlcook.iqas.ios.dao.UserLearningStyleDao;
 import com.zlcook.iqas.ios.dao.UserResourceDao;
-import com.zlcook.iqas.ios.dao.UserTestCountDao;
+import com.zlcook.iqas.ios.dao.UserTestDao;
 import com.zlcook.iqas.ios.dao.UserWordDao;
 import com.zlcook.iqas.ios.dto.SynMetaDTO;
 import com.zlcook.iqas.ios.dto.SynTableData;
@@ -52,7 +52,7 @@ public class DataSynServiceImpl implements DataSynService {
 	@Autowired
 	private UserLearningStyleDao userLearningStyleDao;
 	@Autowired
-	private UserTestCountDao userTestCountDao;
+	private UserTestDao userTestDao;
 	@Autowired
 	private UserResourceDao userResourceDao;
 	@Autowired
@@ -72,17 +72,27 @@ public class DataSynServiceImpl implements DataSynService {
 		if( userId ==null )
 		   return ;
 		
-		String[] synTableArray=new String[]{DataSynService.SYN_USER,DataSynService.SYN_USERCARD,DataSynService.SYN_USERLEARNINGSTYLE,DataSynService.SYN_USERRESOURCE,DataSynService.SYN_USERTESTCOUNT,DataSynService.SYN_USERWORD};
+		String[] synTableArray=new String[]{DataSynService.SYN_USERCARD,DataSynService.SYN_USERLEARNINGSTYLE,DataSynService.SYN_USERRESOURCE,DataSynService.SYN_USERTEST,DataSynService.SYN_USERWORD};
 		//确保该用户没有初始化过
 		DataSynRecordExample example = new DataSynRecordExample();
 		example.createCriteria().andUserIdEqualTo(userId);
 		List<DataSynRecord> list =dataSynRecordDao.list(example);
 		if( list ==null || list.size() ==0){
+			
+			//用户元数据版本设置为1,时间为当前时间，因为用户已经注册过了，服务器端数据版本更新
+			DataSynRecord usertable_meta=new DataSynRecord();
+			usertable_meta.setUserId(userId);
+			usertable_meta.setVersion(1);
+			usertable_meta.setLastModTime(System.currentTimeMillis());
+			usertable_meta.setSynTable(DataSynService.SYN_USER);
+			dataSynRecordDao.save(usertable_meta);
+			
+			//其余元数据设为最初始状态
 			for( String tableName : synTableArray){
 				DataSynRecord table_meta=new DataSynRecord();
 				table_meta.setUserId(userId);
 				table_meta.setVersion(0);
-				table_meta.setLastModTime(0L);
+				table_meta.setLastModTime(null);
 				table_meta.setSynTable(tableName);
 				dataSynRecordDao.save(table_meta);
 			}
@@ -168,12 +178,12 @@ public class DataSynServiceImpl implements DataSynService {
 				}
 				dataSynRecordDao.updateSynTableMetaVersion(userId, DataSynService.SYN_USERRESOURCE);
 			}
-			List<UserTestCount> listUserTestCount =tableData.getUserTestCount();
-			if( listUserTestCount != null  && listUserTestCount.size()>0){
-				for(UserTestCount entity : listUserTestCount){
-					userTestCountDao.update(entity);
+			List<UserTest> listUserTest =tableData.getUserTest();
+			if( listUserTest != null  && listUserTest.size()>0){
+				for(UserTest entity : listUserTest){
+					userTestDao.update(entity);
 				}
-				dataSynRecordDao.updateSynTableMetaVersion(userId, DataSynService.SYN_USERTESTCOUNT);
+				dataSynRecordDao.updateSynTableMetaVersion(userId, DataSynService.SYN_USERTEST);
 			}
 			List<UserWord> listUserWord =tableData.getUserWord();
 			if( listUserWord != null  && listUserWord.size()>0){
@@ -227,11 +237,11 @@ public class DataSynServiceImpl implements DataSynService {
 					synTableData.setUserResource(synTableDatas);
 					continue;
 				}
-				if( name.equalsIgnoreCase(DataSynService.SYN_USERTESTCOUNT) ){
-					UserTestCountExample example = new UserTestCountExample();
+				if( name.equalsIgnoreCase(DataSynService.SYN_USERTEST) ){
+					UserTestExample example = new UserTestExample();
 					example.createCriteria().andUserIdEqualTo(userId);
-					List<UserTestCount> synTableDatas=userTestCountDao.list(example,UserTestCountExample.class);
-					synTableData.setUserTestCount(synTableDatas);
+					List<UserTest> synTableDatas=userTestDao.list(example,UserTestExample.class);
+					synTableData.setUserTest(synTableDatas);
 					continue;
 				}
 				if( name.equalsIgnoreCase(DataSynService.SYN_USERWORD) ){

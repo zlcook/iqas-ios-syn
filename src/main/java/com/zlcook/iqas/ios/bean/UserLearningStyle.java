@@ -40,4 +40,11 @@ public class UserLearningStyle {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+	@Override
+	public String toString() {
+		return "UserLearningStyle [userlearningstyleId=" + userlearningstyleId + ", style1=" + style1 + ", style2="
+				+ style2 + ", userId=" + userId + "]";
+	}
+    
 }

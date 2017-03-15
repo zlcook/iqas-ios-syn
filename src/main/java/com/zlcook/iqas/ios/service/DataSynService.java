@@ -17,13 +17,28 @@ import com.zlcook.iqas.ios.dto.SynTableName;
 public interface DataSynService {
 	
 	/**
-	 * 需要同步表对应实体类的名称
+	 * 用户表名称，一个用户只会对应一条数据
 	 */
 	public final static String SYN_USER="user";
+	/**
+	 * 用户卡表名称，一个用户只会对应一条数据
+	 */
 	public final static String SYN_USERCARD="Usercard";
+	/**
+	 * 学习风格表名称，一个用户只会对应一条数据
+	 */
 	public final static String SYN_USERLEARNINGSTYLE="Userlearningstyle";
+	/**
+	 * 用户资源表名称，一个用户会对应多条数据，且每次同步有可能会有新加的数据，也有可能会在原来数据上修改
+	 */
 	public final static String SYN_USERRESOURCE="userresource";
+	/**
+	 * 用户测试表名称，一个用户会对应多条数据，且每次同步有可能会有新加的数据，也有可能会在原来数据上修改
+	 */
 	public final static String SYN_USERTEST="usertest";
+	/**
+	 * 用户学习单词表名称，一个用户会对应多条数据，且每次同步有可能会有新加的数据，也有可能会在原来数据上修改
+	 */
 	public final static String SYN_USERWORD="userword";
 
 	/**

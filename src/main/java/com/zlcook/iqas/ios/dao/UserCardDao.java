@@ -9,4 +9,9 @@ import com.zlcook.iqas.ios.bean.UserCard;
 */
 public interface UserCardDao  extends BaseDao<UserCard>{
 
+	/**
+	 * 如果数据库中不存在则保存，存在则根据userId进行更新。
+	 * @param userCard
+	 */
+	void saveOrUpdate(UserCard userCard);
 }

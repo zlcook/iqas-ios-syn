@@ -9,4 +9,11 @@ import com.zlcook.iqas.ios.bean.UserResource;
 */
 public interface UserResourceDao extends BaseDao<UserResource> {
 
+	/**
+	 * 根据用户id删除数据
+	 * @param userId
+	 * @return
+	 * 返回删除的条数
+	 */
+	int deleteByUserId(Integer userId);
 }

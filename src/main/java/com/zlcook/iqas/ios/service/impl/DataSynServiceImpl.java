@@ -160,35 +160,53 @@ public class DataSynServiceImpl implements DataSynService {
 	        List<UserCard> listUserCard =tableData.getUserCard();
 			if( listUserCard != null && listUserCard.size()>0 ){
 				for(UserCard entity : listUserCard){
-					userCardDao.update(entity);
+					userCardDao.saveOrUpdate(entity);
 				}
 				dataSynRecordDao.updateSynTableMetaVersion(userId, DataSynService.SYN_USERCARD);
 			}
 			List<UserLearningStyle> listUserLearningStyle = tableData.getUserLearningStyle();
 			if( listUserLearningStyle != null  && listUserLearningStyle.size()>0){
 				for(UserLearningStyle entity : listUserLearningStyle){
-					userLearningStyleDao.update(entity);
+					userLearningStyleDao.saveOrUpdate(entity);
 				}
 				dataSynRecordDao.updateSynTableMetaVersion(userId, DataSynService.SYN_USERLEARNINGSTYLE);
 			}
+			
+			//以下三个表的数据同步采取删除-添加方法，即：每次先删除用户旧的数据，在插入新的数据。不在原来数据上修改。
 			List<UserResource> listUserResource =tableData.getUserResource();
 			if( listUserResource != null  && listUserResource.size()>0){
+				//删除之前的数据
+				userResourceDao.deleteByUserId(userId);
+				//插入新的数据
 				for(UserResource entity : listUserResource){
-					userResourceDao.update(entity);
+					//让其id自动生成
+					entity.setUserResourceId(null);
+					userResourceDao.save(entity);
 				}
 				dataSynRecordDao.updateSynTableMetaVersion(userId, DataSynService.SYN_USERRESOURCE);
 			}
 			List<UserTest> listUserTest =tableData.getUserTest();
 			if( listUserTest != null  && listUserTest.size()>0){
+				//删除之前的数据
+				userTestDao.deleteByUserId(userId);
+				System.out.println(listUserTest.toString());
+				//插入新的数据
 				for(UserTest entity : listUserTest){
-					userTestDao.update(entity);
+					//让其id自动生成
+					entity.setUsertestId(null);
+					userTestDao.save(entity);
 				}
 				dataSynRecordDao.updateSynTableMetaVersion(userId, DataSynService.SYN_USERTEST);
 			}
 			List<UserWord> listUserWord =tableData.getUserWord();
 			if( listUserWord != null  && listUserWord.size()>0){
+				//删除之前的数据
+				userWordDao.deleteByUserId(userId);
+				//插入新的数据
 				for(UserWord entity : listUserWord){
-					userWordDao.update(entity);
+					//让其id自动生成
+					entity.setUserWordId(null);
+					userWordDao.save(entity);
 				}
 				dataSynRecordDao.updateSynTableMetaVersion(userId, DataSynService.SYN_USERWORD);
 			}
@@ -205,6 +223,7 @@ public class DataSynServiceImpl implements DataSynService {
 	public SynTableData getTableData(List<SynTableName> listTableName, Integer userId) {
 		SynTableData synTableData = new SynTableData();
 		if( listTableName !=null ){
+
 			for(SynTableName tableName : listTableName ){
 				String name =tableName.getSynTable();
 				if(name ==null )

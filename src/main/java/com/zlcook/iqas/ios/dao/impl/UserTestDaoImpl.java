@@ -4,6 +4,7 @@ package com.zlcook.iqas.ios.dao.impl;
 import org.springframework.stereotype.Repository;
 
 import com.zlcook.iqas.ios.bean.UserTest;
+import com.zlcook.iqas.ios.bean.UserTestExample;
 import com.zlcook.iqas.ios.dao.AbstractBaseDao;
 import com.zlcook.iqas.ios.dao.UserTestDao;
 import com.zlcook.iqas.ios.mapper.UserTestMapper;
@@ -19,6 +20,14 @@ public class UserTestDaoImpl extends AbstractBaseDao<UserTestMapper, UserTest>im
 	public UserTestDaoImpl(UserTestMapper entityMapper) {
 		super(entityMapper);
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public int deleteByUserId(Integer userId) {
+		// TODO Auto-generated method stub
+		UserTestExample example = new UserTestExample();
+		example.createCriteria().andUserIdEqualTo(userId);
+		return entityMapper.deleteByExample(example);
 	}
 
 }

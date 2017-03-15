@@ -4,6 +4,7 @@ import com.zlcook.iqas.ios.bean.UserCard;
 import com.zlcook.iqas.ios.bean.UserCardExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 public interface UserCardMapper {
@@ -28,4 +29,5 @@ public interface UserCardMapper {
     int updateByPrimaryKeySelective(UserCard record);
 
     int updateByPrimaryKey(UserCard record);
+
  }

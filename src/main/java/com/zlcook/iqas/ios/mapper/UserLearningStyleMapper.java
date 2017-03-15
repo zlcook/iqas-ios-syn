@@ -1,9 +1,11 @@
 package com.zlcook.iqas.ios.mapper;
 
+import com.zlcook.iqas.ios.bean.UserCard;
 import com.zlcook.iqas.ios.bean.UserLearningStyle;
 import com.zlcook.iqas.ios.bean.UserLearningStyleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface UserLearningStyleMapper {
     int countByExample(UserLearningStyleExample example);
@@ -27,4 +29,5 @@ public interface UserLearningStyleMapper {
     int updateByPrimaryKeySelective(UserLearningStyle record);
 
     int updateByPrimaryKey(UserLearningStyle record);
+    
 }

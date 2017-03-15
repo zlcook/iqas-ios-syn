@@ -2,19 +2,19 @@ package com.zlcook.iqas.ios.dto;
 
 import java.util.List;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.zlcook.iqas.ios.bean.User;
 import com.zlcook.iqas.ios.bean.UserCard;
 import com.zlcook.iqas.ios.bean.UserLearningStyle;
 import com.zlcook.iqas.ios.bean.UserResource;
 import com.zlcook.iqas.ios.bean.UserTest;
-import com.zlcook.iqas.ios.bean.UserTestCount;
 import com.zlcook.iqas.ios.bean.UserWord;
 
 /**
 * @author 周亮 
 * @version 创建时间：2017年3月10日 上午9:41:59
 * 多个同步表的数据
-*      
+* 
 */
 public class SynTableData {
 	private List<User> user;
@@ -35,9 +35,11 @@ public class SynTableData {
 	public void setUserCard(List<UserCard> userCard) {
 		this.userCard = userCard;
 	}
+	@JSONField(name="Userlearningstyle")
 	public List<UserLearningStyle> getUserLearningStyle() {
 		return userLearningStyle;
 	}
+	@JSONField(name="Userlearningstyle")
 	public void setUserLearningStyle(List<UserLearningStyle> userLearningStyle) {
 		this.userLearningStyle = userLearningStyle;
 	}

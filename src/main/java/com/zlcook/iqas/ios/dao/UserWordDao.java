@@ -9,4 +9,12 @@ import com.zlcook.iqas.ios.bean.UserWord;
 */
 public interface UserWordDao extends BaseDao<UserWord> {
 
+	/**
+	 * 根据用户id删除数据
+	 * @param userId
+	 * @return
+	 * 返回删除的条数
+	 */
+	int deleteByUserId(Integer userId);
+
 }

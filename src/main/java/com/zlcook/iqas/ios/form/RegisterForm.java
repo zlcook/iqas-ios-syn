@@ -30,7 +30,7 @@ public class RegisterForm {
 	private String grade;
 	@Range(max=6,min=1,message="年级值为1-6")
 	private Integer classNum;
-	@Range(max=200,min=1,message="英语分数为0-200")
+	@Range(max=200,min=1,message="英语分数为1-200")
 	@NotNull
 	private Integer englishscore;
 	

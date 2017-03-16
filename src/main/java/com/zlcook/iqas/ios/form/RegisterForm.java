@@ -1,10 +1,11 @@
 package com.zlcook.iqas.ios.form;
 
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
-import com.sun.istack.internal.NotNull;
 
 /**
 * @author 周亮 
@@ -29,6 +30,7 @@ public class RegisterForm {
 	@NotBlank(message="班级不能为空")
 	private String grade;
 	@Range(max=6,min=1,message="年级值为1-6")
+	@NotNull
 	private Integer classNum;
 	@Range(max=200,min=1,message="英语分数为1-200")
 	@NotNull

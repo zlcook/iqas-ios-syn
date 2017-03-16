@@ -19,11 +19,17 @@ import com.zlcook.iqas.ios.bean.UserWord;
 */
 public class SynTableData {
 	private List<User> user;
+	@JSONField(name="Usercard")
 	private List<UserCard> userCard;
+	@JSONField(name="Userlearningstyle")
 	private List<UserLearningStyle> userLearningStyle;
+	@JSONField(name="usertestcount")
 	private List<UserTestCount> userTestCount;
+	@JSONField(name="userresource")
 	private List<UserResource> userResource;
+	@JSONField(name="usertest")
 	private List<UserTest> userTest;
+	@JSONField(name="userword")
 	private List<UserWord> userWord;
 	
 	public List<User> getUser() {

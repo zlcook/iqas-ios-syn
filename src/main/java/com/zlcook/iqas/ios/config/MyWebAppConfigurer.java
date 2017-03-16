@@ -12,11 +12,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.bind.support.ConfigurableWebBindingInitializer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.zlcook.iqas.ios.converter.JSON2SynMetaFormConverter;
 import com.zlcook.iqas.ios.interceptors.TokenValidInterceptor;
 import com.zlcook.iqas.ios.service.TokenService;
@@ -49,21 +53,25 @@ public class MyWebAppConfigurer extends WebMvcConfigurerAdapter {
 		super.addInterceptors(registry);
 	}
 
-    /**
-     * 增加参数类型转换器失败
-     */
-  /*  @PostConstruct
-    public void initEditableValidation() {
-    
-        ConfigurableWebBindingInitializer initializer = (ConfigurableWebBindingInitializer) handlerAdapter
-            .getWebBindingInitializer();
-        if (initializer.getConversionService() != null) {
-            GenericConversionService genericConversionService = (GenericConversionService) initializer
-                .getConversionService();
-            genericConversionService.addConverter(new JSON2SynMetaFormConverter());
-        }
-     
-    }*/
+
+	/**
+	 * json消息转换器设成fastjson
+	 */
+	@Override
+	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+	        super.configureMessageConverters(converters);
+	      
+	        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
+	 
+	        FastJsonConfig fastJsonConfig = new FastJsonConfig();
+	        fastJsonConfig.setSerializerFeatures( SerializerFeature.PrettyFormat );
+	        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
+	        fastConverter.setFastJsonConfig(fastJsonConfig);
+	      
+	        converters.add(fastConverter);
+	}
+
+
 
 	public TokenService getTokenService() {
 		return tokenService;

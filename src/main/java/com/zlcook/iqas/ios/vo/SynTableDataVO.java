@@ -2,6 +2,7 @@ package com.zlcook.iqas.ios.vo;
 
 import java.util.List;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.zlcook.iqas.ios.bean.DataSynRecord;
 import com.zlcook.iqas.ios.dto.SynTableData;
 

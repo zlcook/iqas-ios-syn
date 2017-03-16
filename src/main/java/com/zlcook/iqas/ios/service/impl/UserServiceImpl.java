@@ -47,11 +47,13 @@ public class UserServiceImpl implements UserService {
 		try{
 			//初始化一些信息
 			user.setAdaptive(1);
+			user.setLearningstyle1(0);
 			user.setLearningstyle2(0);
 			user.setLearningstyle2(0);
 			user.setLearningstyle3(0);;
 			user.setLearningtyle4(0);
 			user.setScore(0);
+			user.setLevel(0);
 			user.setLoginTimes(0);
 			user.setTopiccount1(0);
 			user.setTopiccount2(0);

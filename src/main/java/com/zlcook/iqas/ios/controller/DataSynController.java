@@ -19,6 +19,7 @@ import com.zlcook.iqas.ios.form.RegisterForm;
 import com.zlcook.iqas.ios.form.RequestParams;
 import com.zlcook.iqas.ios.form.SynMetaJSON;
 import com.zlcook.iqas.ios.form.SynTableDataJSON;
+import com.zlcook.iqas.ios.form.TrackTableDataJSON;
 import com.zlcook.iqas.ios.service.DataSynService;
 import com.zlcook.iqas.ios.service.SynStateService;
 import com.zlcook.iqas.ios.service.TokenService;
@@ -157,8 +158,40 @@ public class DataSynController {
 	    
 		return status;
 	}
-	
-	
+
+	/**
+	 * 轨迹数据回收
+	 * @param requestParams 接收数据token、json数据
+	 * @param bindingResult
+	 * @return
+	 */
+	@RequestMapping(value ="/trackdatas",method=RequestMethod.POST)
+	public BaseStatusVO<String> recoverTrackData( @Valid RequestParams<TrackTableDataJSON> requestParams,BindingResult bindingResult){
+		
+		BaseStatusVO<String> status = new BaseStatusVO<>(ResponseStateEnum.SUCCESS); 
+		
+		if( bindingResult.hasErrors()){
+			status.setStatuEnum(ResponseStateEnum.PARAM_ERROR);
+			return status;
+		}
+		//0.解析得到json数据
+		TrackTableDataJSON trackTableData=(TrackTableDataJSON) requestParams.getObjFromJSON(TrackTableDataJSON.class);
+		
+		Integer userId = tokenService.getUserIdFromToken(requestParams.getToken());
+		//1.保存接收的轨迹数据
+		boolean saveResult =dataSynService.saveTrackTable(trackTableData.getTrackData(),userId);
+		if( !saveResult ){
+			status.setStatuEnum(ResponseStateEnum.TRACK_FAILURE);
+			return status;
+		}
+		return status;
+	}
+	/**
+	 * 忽略同步提示方法
+	 * @param form 参数
+	 * @param bindingResult
+	 * @return
+	 */
 	@RequestMapping(value ="/ignore",method=RequestMethod.POST)
 	public BaseStatusVO<String> ignoreSynRemind(@Valid IgnoreSynRemindForm form,BindingResult bindingResult){
 		
@@ -172,5 +205,9 @@ public class DataSynController {
 		synStateService.ignoreSynRemind(userId, form.getSynDevice());
 		return status;
 	}
+	
+	
+	
+	
 	
 }

@@ -8,5 +8,10 @@ import com.zlcook.iqas.ios.bean.UserTestCount;
 * 
 */
 public interface UserTestCountDao extends BaseDao<UserTestCount> {
+	/**
+	 * 如果数据库中不存在则保存，存在则根据userId进行更新。
+	 * @param userLearningStyle
+	 */
+	void saveOrUpdate(UserTestCount entity);
 
 }

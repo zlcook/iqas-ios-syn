@@ -36,14 +36,23 @@ import com.zlcook.iqas.ios.vo.BaseStatusVO;
 public class GlobalExceptionHandler {
 	 private static Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 	 
-	 
+
+	 /**
+	   * 服务层异常
+	   */
+	  //@ResponseStatus(HttpStatus.BAD_REQUEST)
+	  @ExceptionHandler(BaseServiceException.class)
+	  public BaseStatusVO handleBaseServiceException(BaseServiceException e) {
+		  logger.error(e.getMessage(),e);
+	    return new BaseStatusVO<>(e.getStatus());
+	  }
 	 /**
 	   * 请求参数异常：参数不存在,参数不满足要求
 	   */
 	  //@ResponseStatus(HttpStatus.BAD_REQUEST)
 	  @ExceptionHandler(RequestParamersException.class)
 	  public BaseStatusVO handleRequestParamersException(RequestParamersException e) {
-	    logger.info(e.getMessage());
+		  logger.error(e.getMessage(),e);
 	    return new BaseStatusVO<>(ResponseStateEnum.PARAM_ERROR);
 	  }
 	 
@@ -53,7 +62,7 @@ public class GlobalExceptionHandler {
 	  //@ResponseStatus(HttpStatus.BAD_REQUEST)
 	  @ExceptionHandler(JSONDataParseException.class)
 	  public BaseStatusVO handleJSONDataParseException(JSONDataParseException e) {
-	    logger.info(e.getMessage());
+	    logger.error(e.getMessage(),e);
 	    return new BaseStatusVO<>(ResponseStateEnum.JSON_DATA_ERROR);
 	  }
 	 
@@ -63,7 +72,7 @@ public class GlobalExceptionHandler {
 	  //@ResponseStatus(HttpStatus.BAD_REQUEST)
 	  @ExceptionHandler(TokenInvalidException.class)
 	  public BaseStatusVO handleTokenInvalidException(TokenInvalidException e) {
-	    logger.info("token无效");
+	    logger.error("token无效",e);
 	    return new BaseStatusVO<>(ResponseStateEnum.TOKEN_INVALID);
 	  }
 	 

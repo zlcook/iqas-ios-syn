@@ -9,7 +9,7 @@ import com.zlcook.iqas.ios.bean.SynState;
 import com.zlcook.iqas.ios.dao.SynStateDao;
 import com.zlcook.iqas.ios.enums.ResponseStateEnum;
 import com.zlcook.iqas.ios.enums.SynStateEnum;
-import com.zlcook.iqas.ios.exception.ServiceException;
+import com.zlcook.iqas.ios.exception.BaseServiceException;
 import com.zlcook.iqas.ios.service.SynStateService;
 
 /**
@@ -70,7 +70,7 @@ public class SynStateServiceImpl implements SynStateService {
 		// TODO Auto-generated method stub
 		SynState synState = synStateDao.getById(userId);
 		if( synState == null ){
-			throw new ServiceException(ResponseStateEnum.USER_USERID_INVALID);
+			throw new BaseServiceException(ResponseStateEnum.USER_USERID_INVALID);
 		}
 		synState.setSynResult(false);
 		synStateDao.update(synState);
@@ -80,7 +80,7 @@ public class SynStateServiceImpl implements SynStateService {
 		// TODO Auto-generated method stub
 		SynState synState = synStateDao.getById(userId);
 		if( synState == null ){
-			throw new ServiceException(ResponseStateEnum.USER_USERID_INVALID);
+			throw new BaseServiceException(ResponseStateEnum.USER_USERID_INVALID);
 		}
 		synState.setSynResult(true);
 		Integer count = synState.getSynCount();
@@ -93,7 +93,7 @@ public class SynStateServiceImpl implements SynStateService {
 		// TODO Auto-generated method stub
 		SynState synState = synStateDao.getById(userId);
 		if( synState == null ){
-			throw new ServiceException(ResponseStateEnum.USER_USERID_INVALID);
+			throw new BaseServiceException(ResponseStateEnum.USER_USERID_INVALID);
 		}
 		synState.setSynResult(true);
 		synState.setSynDevice(synDevice);

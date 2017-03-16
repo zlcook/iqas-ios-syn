@@ -1,12 +1,10 @@
 package com.zlcook.iqas.ios.form;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+
+import com.sun.istack.internal.NotNull;
 
 /**
 * @author 周亮 
@@ -26,9 +24,16 @@ public class RegisterForm {
 	private String realName;
 	@Range(max=1,min=0)
 	private Integer sex	;
+	@NotBlank(message="学校不能为空")
 	private String school;
+	@NotBlank(message="班级不能为空")
 	private String grade;
+	@Range(max=6,min=1,message="年级值为1-6")
 	private Integer classNum;
+	@Range(max=200,min=1,message="英语分数为0-200")
+	@NotNull
+	private Integer englishscore;
+	
 	public String getLoginName() {
 		return loginName;
 	}
@@ -70,6 +75,12 @@ public class RegisterForm {
 	}
 	public void setClassNum(Integer classNum) {
 		this.classNum = classNum;
+	}
+	public Integer getEnglishscore() {
+		return englishscore;
+	}
+	public void setEnglishscore(Integer englishscore) {
+		this.englishscore = englishscore;
 	}
 	
 }

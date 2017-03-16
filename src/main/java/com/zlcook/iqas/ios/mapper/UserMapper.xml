@@ -6,6 +6,7 @@
     <result column="adaptive" property="adaptive" jdbcType="INTEGER" />
     <result column="class_num" property="classNum" jdbcType="INTEGER" />
     <result column="grade" property="grade" jdbcType="VARCHAR" />
+    <result column="englishscore" property="englishscore" jdbcType="INTEGER" />
     <result column="learningstyle1" property="learningstyle1" jdbcType="INTEGER" />
     <result column="learningstyle2" property="learningstyle2" jdbcType="INTEGER" />
     <result column="learningstyle3" property="learningstyle3" jdbcType="INTEGER" />
@@ -91,11 +92,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    user_id, adaptive, class_num, grade, learningstyle1, learningstyle2, learningstyle3, 
-    learningtyle4, level, login_name, login_times, password, presentgrade, real_name, 
-    resourcecount1, resourcecount2, resourcecount3, resourcecount4, school, score, sex, 
-    topiccount1, topiccount2, wordcount, wordcount1, workcount, workcount1, workcount2, 
-    workcount3
+    user_id, adaptive, class_num, grade, englishscore, learningstyle1, learningstyle2, 
+    learningstyle3, learningtyle4, level, login_name, login_times, password, presentgrade, 
+    real_name, resourcecount1, resourcecount2, resourcecount3, resourcecount4, school, 
+    score, sex, topiccount1, topiccount2, wordcount, wordcount1, workcount, workcount1, 
+    workcount2, workcount3
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zlcook.iqas.ios.bean.UserExample" >
     select
@@ -129,25 +130,27 @@
   </delete>
   <insert id="insert" parameterType="com.zlcook.iqas.ios.bean.User" >
     insert into user (user_id, adaptive, class_num, 
-      grade, learningstyle1, learningstyle2, 
-      learningstyle3, learningtyle4, level, 
-      login_name, login_times, password, 
-      presentgrade, real_name, resourcecount1, 
-      resourcecount2, resourcecount3, resourcecount4, 
-      school, score, sex, 
-      topiccount1, topiccount2, wordcount, 
-      wordcount1, workcount, workcount1, 
-      workcount2, workcount3)
+      grade, englishscore, learningstyle1, 
+      learningstyle2, learningstyle3, learningtyle4, 
+      level, login_name, login_times, 
+      password, presentgrade, real_name, 
+      resourcecount1, resourcecount2, resourcecount3, 
+      resourcecount4, school, score, 
+      sex, topiccount1, topiccount2, 
+      wordcount, wordcount1, workcount, 
+      workcount1, workcount2, workcount3
+      )
     values (#{userId,jdbcType=INTEGER}, #{adaptive,jdbcType=INTEGER}, #{classNum,jdbcType=INTEGER}, 
-      #{grade,jdbcType=VARCHAR}, #{learningstyle1,jdbcType=INTEGER}, #{learningstyle2,jdbcType=INTEGER}, 
-      #{learningstyle3,jdbcType=INTEGER}, #{learningtyle4,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, 
-      #{loginName,jdbcType=VARCHAR}, #{loginTimes,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, 
-      #{presentgrade,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, #{resourcecount1,jdbcType=INTEGER}, 
-      #{resourcecount2,jdbcType=INTEGER}, #{resourcecount3,jdbcType=INTEGER}, #{resourcecount4,jdbcType=INTEGER}, 
-      #{school,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, #{sex,jdbcType=INTEGER}, 
-      #{topiccount1,jdbcType=INTEGER}, #{topiccount2,jdbcType=INTEGER}, #{wordcount,jdbcType=INTEGER}, 
-      #{wordcount1,jdbcType=INTEGER}, #{workcount,jdbcType=INTEGER}, #{workcount1,jdbcType=INTEGER}, 
-      #{workcount2,jdbcType=INTEGER}, #{workcount3,jdbcType=INTEGER})
+      #{grade,jdbcType=VARCHAR}, #{englishscore,jdbcType=INTEGER}, #{learningstyle1,jdbcType=INTEGER}, 
+      #{learningstyle2,jdbcType=INTEGER}, #{learningstyle3,jdbcType=INTEGER}, #{learningtyle4,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{loginTimes,jdbcType=INTEGER}, 
+      #{password,jdbcType=VARCHAR}, #{presentgrade,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, 
+      #{resourcecount1,jdbcType=INTEGER}, #{resourcecount2,jdbcType=INTEGER}, #{resourcecount3,jdbcType=INTEGER}, 
+      #{resourcecount4,jdbcType=INTEGER}, #{school,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
+      #{sex,jdbcType=INTEGER}, #{topiccount1,jdbcType=INTEGER}, #{topiccount2,jdbcType=INTEGER}, 
+      #{wordcount,jdbcType=INTEGER}, #{wordcount1,jdbcType=INTEGER}, #{workcount,jdbcType=INTEGER}, 
+      #{workcount1,jdbcType=INTEGER}, #{workcount2,jdbcType=INTEGER}, #{workcount3,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zlcook.iqas.ios.bean.User" >
     insert into user
@@ -163,6 +166,9 @@
       </if>
       <if test="grade != null" >
         grade,
+      </if>
+      <if test="englishscore != null" >
+        englishscore,
       </if>
       <if test="learningstyle1 != null" >
         learningstyle1,
@@ -252,6 +258,9 @@
       </if>
       <if test="grade != null" >
         #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="englishscore != null" >
+        #{englishscore,jdbcType=INTEGER},
       </if>
       <if test="learningstyle1 != null" >
         #{learningstyle1,jdbcType=INTEGER},
@@ -351,6 +360,9 @@
       <if test="record.grade != null" >
         grade = #{record.grade,jdbcType=VARCHAR},
       </if>
+      <if test="record.englishscore != null" >
+        englishscore = #{record.englishscore,jdbcType=INTEGER},
+      </if>
       <if test="record.learningstyle1 != null" >
         learningstyle1 = #{record.learningstyle1,jdbcType=INTEGER},
       </if>
@@ -437,6 +449,7 @@
       adaptive = #{record.adaptive,jdbcType=INTEGER},
       class_num = #{record.classNum,jdbcType=INTEGER},
       grade = #{record.grade,jdbcType=VARCHAR},
+      englishscore = #{record.englishscore,jdbcType=INTEGER},
       learningstyle1 = #{record.learningstyle1,jdbcType=INTEGER},
       learningstyle2 = #{record.learningstyle2,jdbcType=INTEGER},
       learningstyle3 = #{record.learningstyle3,jdbcType=INTEGER},
@@ -477,6 +490,9 @@
       </if>
       <if test="grade != null" >
         grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="englishscore != null" >
+        englishscore = #{englishscore,jdbcType=INTEGER},
       </if>
       <if test="learningstyle1 != null" >
         learningstyle1 = #{learningstyle1,jdbcType=INTEGER},
@@ -561,6 +577,7 @@
     set adaptive = #{adaptive,jdbcType=INTEGER},
       class_num = #{classNum,jdbcType=INTEGER},
       grade = #{grade,jdbcType=VARCHAR},
+      englishscore = #{englishscore,jdbcType=INTEGER},
       learningstyle1 = #{learningstyle1,jdbcType=INTEGER},
       learningstyle2 = #{learningstyle2,jdbcType=INTEGER},
       learningstyle3 = #{learningstyle3,jdbcType=INTEGER},

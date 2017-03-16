@@ -45,6 +45,27 @@ public class UserServiceImpl implements UserService {
 		if( existUser !=null )
 			return -1;
 		try{
+			//初始化一些信息
+			user.setAdaptive(1);
+			user.setLearningstyle2(0);
+			user.setLearningstyle2(0);
+			user.setLearningstyle3(0);;
+			user.setLearningtyle4(0);
+			user.setScore(0);
+			user.setLoginTimes(0);
+			user.setTopiccount1(0);
+			user.setTopiccount2(0);
+			user.setWordcount(0);
+			user.setWordcount1(0);
+			user.setWorkcount(0);
+			user.setWorkcount1(0);
+			user.setWorkcount2(0);
+			user.setWorkcount3(0);
+			user.setResourcecount1(0);
+			user.setResourcecount2(0);
+			user.setResourcecount3(0);
+			user.setResourcecount4(0);
+			user.setPresentgrade(0);
 			userDao.save(user);
 
 			//初始化用户关于同步数据表的元数据表

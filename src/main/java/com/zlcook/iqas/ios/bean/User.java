@@ -9,6 +9,8 @@ public class User {
 
     private String grade;
 
+    private Integer englishscore;
+
     private Integer learningstyle1;
 
     private Integer learningstyle2;
@@ -89,6 +91,14 @@ public class User {
 
     public void setGrade(String grade) {
         this.grade = grade == null ? null : grade.trim();
+    }
+
+    public Integer getEnglishscore() {
+        return englishscore;
+    }
+
+    public void setEnglishscore(Integer englishscore) {
+        this.englishscore = englishscore;
     }
 
     public Integer getLearningstyle1() {

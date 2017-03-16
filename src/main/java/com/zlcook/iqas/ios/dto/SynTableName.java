@@ -23,5 +23,9 @@ public class SynTableName {
 		public void setSynTable(String synTable) {
 			this.synTable = synTable;
 		}
+		@Override
+		public String toString() {
+			return "SynTableName [synTable=" + synTable + "]";
+		}
 		
 }

@@ -8,6 +8,7 @@ import com.zlcook.iqas.ios.bean.DataSynRecord;
 import com.zlcook.iqas.ios.dto.SynMetaDTO;
 import com.zlcook.iqas.ios.dto.SynTableData;
 import com.zlcook.iqas.ios.dto.SynTableName;
+import com.zlcook.iqas.ios.dto.TrackTableData;
 
 /**
 * @author 周亮 
@@ -16,16 +17,6 @@ import com.zlcook.iqas.ios.dto.SynTableName;
 */
 public interface DataSynService {
 	
-	/**
-	 * 需要同步表对应实体类的名称
-	 */
-	public final static String SYN_USER="user";
-	public final static String SYN_USERCARD="Usercard";
-	public final static String SYN_USERLEARNINGSTYLE="Userlearningstyle";
-	public final static String SYN_USERRESOURCE="userresource";
-	public final static String SYN_USERTEST="usertest";
-	public final static String SYN_USERWORD="userword";
-
 	/**
 	 * 获取用户所有同步表元数据
 	 * @param userId 用户id
@@ -57,6 +48,16 @@ public interface DataSynService {
 	 */
 	@Transactional
 	boolean updateSynTable(SynTableData tableData,Integer userId);
+	
+	/**
+	 * 保存轨迹数据
+	 * @param trackData 轨迹数据
+	 * @param userId 
+	 * @return
+	 * 保存成功返回true，否则返回false，方法具有事务性
+	 */
+	@Transactional
+	boolean saveTrackTable(TrackTableData trackData,Integer userId);
 	/**
 	 * 根据表名称和用户id获取该用户在该表中的所有数据
 	 * @param listTableName 表名称集合

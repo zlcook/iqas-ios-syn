@@ -3,6 +3,10 @@ package com.zlcook.iqas.ios.bean;
 public class UserTestCount {
     private Integer usertestcountId;
 
+    private Integer testcount;
+
+    private Integer testrightcount;
+    
     private Integer test1count;
 
     private Integer test1rightcount;
@@ -18,10 +22,6 @@ public class UserTestCount {
     private Integer test4count;
 
     private Integer test4rightcount;
-
-    private Integer testcount;
-
-    private Integer testrightcount;
 
     private Integer userId;
 

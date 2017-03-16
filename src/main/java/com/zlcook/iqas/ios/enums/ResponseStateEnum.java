@@ -54,8 +54,9 @@ public enum ResponseStateEnum {
 	
 	USER_USERID_INVALID(2004,"用户id无效"),
 	
-	
+
 	SYN_FAILURE(3000,"数据同步失败"),
+	TRACK_FAILURE(3001,"轨迹数据上传失败"),
 	
 	/**
 	 * 服务层操作出现异常

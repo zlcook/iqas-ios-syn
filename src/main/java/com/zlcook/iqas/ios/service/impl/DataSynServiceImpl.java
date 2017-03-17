@@ -118,6 +118,7 @@ public class DataSynServiceImpl implements DataSynService {
 	public SynMetaDTO getSynMeta(List<DataSynRecord> serverTableMetas, List<DataSynRecord> mobileTableMetas) {
 		// TODO Auto-generated method stub
 		
+		System.out.println(mobileTableMetas);
 		int count = serverTableMetas.size();
 		SynMetaDTO synMetaDTO = new SynMetaDTO();
 		for(int i=0;i< count;i++ ){

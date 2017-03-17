@@ -7,7 +7,7 @@
     <result column="learntimenow" property="learntimenow" jdbcType="INTEGER" />
     <result column="learntimes" property="learntimes" jdbcType="INTEGER" />
     <result column="r_type" property="rType" jdbcType="INTEGER" />
-    <result column="resource_id" property="resourceId" jdbcType="INTEGER" />
+    <result column="resource_id" property="resourceId" jdbcType="VARCHAR" />
     <result column="rlogin_time" property="rloginTime" jdbcType="TIMESTAMP" />
     <result column="rlogout_time" property="rlogoutTime" jdbcType="TIMESTAMP" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
@@ -111,7 +111,7 @@
       rlogin_time, rlogout_time, user_id, 
       word)
     values (#{userResourceId,jdbcType=INTEGER}, #{learncount,jdbcType=INTEGER}, #{learntimenow,jdbcType=INTEGER}, 
-      #{learntimes,jdbcType=INTEGER}, #{rType,jdbcType=INTEGER}, #{resourceId,jdbcType=INTEGER}, 
+      #{learntimes,jdbcType=INTEGER}, #{rType,jdbcType=INTEGER}, #{resourceId,jdbcType=VARCHAR}, 
       #{rloginTime,jdbcType=TIMESTAMP}, #{rlogoutTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, 
       #{word,jdbcType=VARCHAR})
   </insert>
@@ -166,7 +166,7 @@
         #{rType,jdbcType=INTEGER},
       </if>
       <if test="resourceId != null" >
-        #{resourceId,jdbcType=INTEGER},
+        #{resourceId,jdbcType=VARCHAR},
       </if>
       <if test="rloginTime != null" >
         #{rloginTime,jdbcType=TIMESTAMP},
@@ -207,7 +207,7 @@
         r_type = #{record.rType,jdbcType=INTEGER},
       </if>
       <if test="record.resourceId != null" >
-        resource_id = #{record.resourceId,jdbcType=INTEGER},
+        resource_id = #{record.resourceId,jdbcType=VARCHAR},
       </if>
       <if test="record.rloginTime != null" >
         rlogin_time = #{record.rloginTime,jdbcType=TIMESTAMP},
@@ -233,7 +233,7 @@
       learntimenow = #{record.learntimenow,jdbcType=INTEGER},
       learntimes = #{record.learntimes,jdbcType=INTEGER},
       r_type = #{record.rType,jdbcType=INTEGER},
-      resource_id = #{record.resourceId,jdbcType=INTEGER},
+      resource_id = #{record.resourceId,jdbcType=VARCHAR},
       rlogin_time = #{record.rloginTime,jdbcType=TIMESTAMP},
       rlogout_time = #{record.rlogoutTime,jdbcType=TIMESTAMP},
       user_id = #{record.userId,jdbcType=INTEGER},
@@ -258,7 +258,7 @@
         r_type = #{rType,jdbcType=INTEGER},
       </if>
       <if test="resourceId != null" >
-        resource_id = #{resourceId,jdbcType=INTEGER},
+        resource_id = #{resourceId,jdbcType=VARCHAR},
       </if>
       <if test="rloginTime != null" >
         rlogin_time = #{rloginTime,jdbcType=TIMESTAMP},
@@ -281,7 +281,7 @@
       learntimenow = #{learntimenow,jdbcType=INTEGER},
       learntimes = #{learntimes,jdbcType=INTEGER},
       r_type = #{rType,jdbcType=INTEGER},
-      resource_id = #{resourceId,jdbcType=INTEGER},
+      resource_id = #{resourceId,jdbcType=VARCHAR},
       rlogin_time = #{rloginTime,jdbcType=TIMESTAMP},
       rlogout_time = #{rlogoutTime,jdbcType=TIMESTAMP},
       user_id = #{userId,jdbcType=INTEGER},

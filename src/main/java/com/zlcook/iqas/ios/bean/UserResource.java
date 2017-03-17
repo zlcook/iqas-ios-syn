@@ -13,7 +13,7 @@ public class UserResource {
 
     private Integer rType;
 
-    private Integer resourceId;
+    private String resourceId;
 
     private Date rloginTime;
 
@@ -63,12 +63,12 @@ public class UserResource {
         this.rType = rType;
     }
 
-    public Integer getResourceId() {
+    public String getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(Integer resourceId) {
-        this.resourceId = resourceId;
+    public void setResourceId(String resourceId) {
+        this.resourceId = resourceId == null ? null : resourceId.trim();
     }
 
     public Date getRloginTime() {

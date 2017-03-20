@@ -7,7 +7,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.zlcook.iqas.ios.bean.SynState;
-import com.zlcook.iqas.ios.bean.User;
 import com.zlcook.iqas.ios.dao.SynStateDao;
 import com.zlcook.iqas.ios.service.TokenService;
 import com.zlcook.iqas.ios.unitl.TokenUtils;

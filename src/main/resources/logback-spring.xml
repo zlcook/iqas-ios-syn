@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">   
+
+    <!-- <include resource="org/springframework/boot/logging/logback/defaults.xml" />  -->
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">    
+     <layout class="ch.qos.logback.classic.PatternLayout">    
+       <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg%n</pattern>    
+     </layout>    
+   </appender>    
+   
+ <!-- 开发环境所有日志文件-->  
+ <appender name="ALL_FILE_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">     
+   <!-- 程序运行期间产生的日志存放位置：活动文件 -->
+   <file>${LOG_PATH}/iqasweb/ios-syn/iqas-ios-syn_stats_all.log</file>
+  <!-- 滚动记录文件，先将日志记录到指定文件，上面file指定的，当符合某个条件（下面%d{yyyy-MM-dd}指定的，即每天归档一次）时，将日志记录到其他文件进行归档（下面fileNamePattern指定的 ）-->
+   <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+     <fileNamePattern>${LOG_PATH}/iqasweb/ios-syn/iqas-ios-syn_stats_all/%d{yyyy-MM-dd}.log</fileNamePattern>   
+     <!-- 归档日志保留天数 -->
+     <maxHistory>30</maxHistory>   
+  </rollingPolicy>   
+  <!-- 文件大于10M则触发滚动记录文件事件，即是对 %d{yyyy-MM-dd}的补充-->
+   <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">   
+      <maxFileSize>10MB</maxFileSize>   
+   </triggeringPolicy>   
+  <encoder>   
+   <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg%n</pattern>   
+  </encoder>   
+ </appender>  
+     
+ <appender name="MONITOR_WARN_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+  <file>${LOG_PATH}/iqasweb/ios-syn/iqas-ios-syn_monitor_warn.log</file>
+  <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+   <fileNamePattern>${LOG_PATH}/iqasweb/ios-syn/iqas-ios-syn_monitor_warn/%d{yyyy-MM-dd}.log</fileNamePattern>   
+   <maxHistory>30</maxHistory>  
+  </rollingPolicy>   
+  <encoder>   
+   <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg%n</pattern>   
+  </encoder>   
+ </appender>  
+ 
+    <!-- 记录警告及错误信息，为com.zlcook.iqas.ios包下的所有类指定Appender     -->
+	 <!--   <logger name="com.zlcook.iqas.ios" level="WARN" additivity="false">  
+		  <appender-ref ref="MONITOR_WARN_LOG" />  
+	   </logger> -->  
+	   
+	   <!-- 开发环境日志 -->
+	<springProfile name="development">
+	 <root level="INFO">   
+	  		<appender-ref ref="ALL_FILE_LOG" />  
+	  		<appender-ref ref="STDOUT" />  
+	   </root>   
+	</springProfile>
+      
+      <!-- 生产环境日志 -->
+	<springProfile name="remoteproduction">
+	   <logger name="com.zlcook.iqas.ios" level="WARN" additivity="false">  
+		  <appender-ref ref="MONITOR_WARN_LOG" />  
+	   </logger>
+	 <root level="INFO">   
+	  		<appender-ref ref="ALL_FILE_LOG" /> 
+	   </root>   
+	</springProfile>
+</configuration>  

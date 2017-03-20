@@ -3,7 +3,7 @@
 <mapper namespace="com.zlcook.iqas.ios.mapper.UserWordMapper" >
   <resultMap id="BaseResultMap" type="com.zlcook.iqas.ios.bean.UserWord" >
     <id column="user_word_id" property="userWordId" jdbcType="INTEGER" />
-    <result column="topi" property="topi" jdbcType="INTEGER" />
+    <result column="topic" property="topic" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="word" property="word" jdbcType="VARCHAR" />
     <result column="wordlearn" property="wordlearn" jdbcType="INTEGER" />
@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    user_word_id, topi, user_id, word, wordlearn, wordtest, wrongtesttimes
+    user_word_id, topic, user_id, word, wordlearn, wordtest, wrongtesttimes
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zlcook.iqas.ios.bean.UserWordExample" >
     select
@@ -102,10 +102,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.zlcook.iqas.ios.bean.UserWord" >
-    insert into user_word (user_word_id, topi, user_id, 
+    insert into user_word (user_word_id, topic, user_id, 
       word, wordlearn, wordtest, 
       wrongtesttimes)
-    values (#{userWordId,jdbcType=INTEGER}, #{topi,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+    values (#{userWordId,jdbcType=INTEGER}, #{topic,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
       #{word,jdbcType=VARCHAR}, #{wordlearn,jdbcType=INTEGER}, #{wordtest,jdbcType=INTEGER}, 
       #{wrongtesttimes,jdbcType=INTEGER})
   </insert>
@@ -115,8 +115,8 @@
       <if test="userWordId != null" >
         user_word_id,
       </if>
-      <if test="topi != null" >
-        topi,
+      <if test="topic != null" >
+        topic,
       </if>
       <if test="userId != null" >
         user_id,
@@ -138,8 +138,8 @@
       <if test="userWordId != null" >
         #{userWordId,jdbcType=INTEGER},
       </if>
-      <if test="topi != null" >
-        #{topi,jdbcType=INTEGER},
+      <if test="topic != null" >
+        #{topic,jdbcType=INTEGER},
       </if>
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
@@ -170,8 +170,8 @@
       <if test="record.userWordId != null" >
         user_word_id = #{record.userWordId,jdbcType=INTEGER},
       </if>
-      <if test="record.topi != null" >
-        topi = #{record.topi,jdbcType=INTEGER},
+      <if test="record.topic != null" >
+        topic = #{record.topic,jdbcType=INTEGER},
       </if>
       <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=INTEGER},
@@ -196,7 +196,7 @@
   <update id="updateByExample" parameterType="map" >
     update user_word
     set user_word_id = #{record.userWordId,jdbcType=INTEGER},
-      topi = #{record.topi,jdbcType=INTEGER},
+      topic = #{record.topic,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       word = #{record.word,jdbcType=VARCHAR},
       wordlearn = #{record.wordlearn,jdbcType=INTEGER},
@@ -209,8 +209,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zlcook.iqas.ios.bean.UserWord" >
     update user_word
     <set >
-      <if test="topi != null" >
-        topi = #{topi,jdbcType=INTEGER},
+      <if test="topic != null" >
+        topic = #{topic,jdbcType=INTEGER},
       </if>
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
@@ -232,7 +232,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zlcook.iqas.ios.bean.UserWord" >
     update user_word
-    set topi = #{topi,jdbcType=INTEGER},
+    set topic = #{topic,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
       word = #{word,jdbcType=VARCHAR},
       wordlearn = #{wordlearn,jdbcType=INTEGER},

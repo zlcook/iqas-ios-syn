@@ -1,13 +1,12 @@
 package com.zlcook.iqas.ios.service.impl;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.zlcook.iqas.ios.bean.SynState;
 import com.zlcook.iqas.ios.bean.User;
-import com.zlcook.iqas.ios.dao.DataSynRecordDao;
 import com.zlcook.iqas.ios.dao.SynStateDao;
 import com.zlcook.iqas.ios.dao.UserDao;
 import com.zlcook.iqas.ios.dto.LoginDTO;
@@ -24,7 +23,7 @@ import com.zlcook.iqas.ios.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 	//日志类
-	private final Logger logger = org.apache.log4j.LogManager.getLogger(UserServiceImpl.class);
+	private final static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	@Autowired
 	private UserDao userDao;

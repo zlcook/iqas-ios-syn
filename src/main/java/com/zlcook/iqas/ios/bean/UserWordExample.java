@@ -164,63 +164,63 @@ public class UserWordExample {
             return (Criteria) this;
         }
 
-        public Criteria andTopiIsNull() {
-            addCriterion("topi is null");
+        public Criteria andTopicIsNull() {
+            addCriterion("topic is null");
             return (Criteria) this;
         }
 
-        public Criteria andTopiIsNotNull() {
-            addCriterion("topi is not null");
+        public Criteria andTopicIsNotNull() {
+            addCriterion("topic is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTopiEqualTo(Integer value) {
-            addCriterion("topi =", value, "topi");
+        public Criteria andTopicEqualTo(Integer value) {
+            addCriterion("topic =", value, "topic");
             return (Criteria) this;
         }
 
-        public Criteria andTopiNotEqualTo(Integer value) {
-            addCriterion("topi <>", value, "topi");
+        public Criteria andTopicNotEqualTo(Integer value) {
+            addCriterion("topic <>", value, "topic");
             return (Criteria) this;
         }
 
-        public Criteria andTopiGreaterThan(Integer value) {
-            addCriterion("topi >", value, "topi");
+        public Criteria andTopicGreaterThan(Integer value) {
+            addCriterion("topic >", value, "topic");
             return (Criteria) this;
         }
 
-        public Criteria andTopiGreaterThanOrEqualTo(Integer value) {
-            addCriterion("topi >=", value, "topi");
+        public Criteria andTopicGreaterThanOrEqualTo(Integer value) {
+            addCriterion("topic >=", value, "topic");
             return (Criteria) this;
         }
 
-        public Criteria andTopiLessThan(Integer value) {
-            addCriterion("topi <", value, "topi");
+        public Criteria andTopicLessThan(Integer value) {
+            addCriterion("topic <", value, "topic");
             return (Criteria) this;
         }
 
-        public Criteria andTopiLessThanOrEqualTo(Integer value) {
-            addCriterion("topi <=", value, "topi");
+        public Criteria andTopicLessThanOrEqualTo(Integer value) {
+            addCriterion("topic <=", value, "topic");
             return (Criteria) this;
         }
 
-        public Criteria andTopiIn(List<Integer> values) {
-            addCriterion("topi in", values, "topi");
+        public Criteria andTopicIn(List<Integer> values) {
+            addCriterion("topic in", values, "topic");
             return (Criteria) this;
         }
 
-        public Criteria andTopiNotIn(List<Integer> values) {
-            addCriterion("topi not in", values, "topi");
+        public Criteria andTopicNotIn(List<Integer> values) {
+            addCriterion("topic not in", values, "topic");
             return (Criteria) this;
         }
 
-        public Criteria andTopiBetween(Integer value1, Integer value2) {
-            addCriterion("topi between", value1, value2, "topi");
+        public Criteria andTopicBetween(Integer value1, Integer value2) {
+            addCriterion("topic between", value1, value2, "topic");
             return (Criteria) this;
         }
 
-        public Criteria andTopiNotBetween(Integer value1, Integer value2) {
-            addCriterion("topi not between", value1, value2, "topi");
+        public Criteria andTopicNotBetween(Integer value1, Integer value2) {
+            addCriterion("topic not between", value1, value2, "topic");
             return (Criteria) this;
         }
 

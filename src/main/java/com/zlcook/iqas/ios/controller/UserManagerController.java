@@ -6,7 +6,8 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +35,7 @@ import com.zlcook.iqas.ios.vo.LoginVO;
 @RestController
 public class UserManagerController {
 	//日志类
-	private final Logger logger = org.apache.log4j.LogManager.getLogger(UserManagerController.class);
-	
+	private final static Logger logger = LoggerFactory.getLogger(UserManagerController.class);
 	
 	/**
 	 * User服务类
@@ -52,7 +52,8 @@ public class UserManagerController {
 	 */
 	@RequestMapping(value="/register",produces="application/json; charset=UTF-8", method=RequestMethod.POST)
 	public  BaseStatusVO<Map<String,Integer>> register( @Valid RegisterForm form,BindingResult bindingResult){
-		
+		String str = "";
+		str.substring(0,0);
 		BaseStatusVO<Map<String,Integer>> status=new BaseStatusVO<Map<String,Integer>>(ResponseStateEnum.SUCCESS);
 		if( bindingResult.hasErrors()){
 			status.setStatuEnum(ResponseStateEnum.PARAM_ERROR);

@@ -15,7 +15,6 @@ import com.zlcook.iqas.ios.dto.SynMetaDTO;
 import com.zlcook.iqas.ios.dto.SynTableData;
 import com.zlcook.iqas.ios.enums.ResponseStateEnum;
 import com.zlcook.iqas.ios.form.IgnoreSynRemindForm;
-import com.zlcook.iqas.ios.form.RegisterForm;
 import com.zlcook.iqas.ios.form.RequestParams;
 import com.zlcook.iqas.ios.form.SynMetaJSON;
 import com.zlcook.iqas.ios.form.SynTableDataJSON;

@@ -3,7 +3,7 @@ package com.zlcook.iqas.ios.bean;
 public class UserWord {
     private Integer userWordId;
 
-    private Integer topi;
+    private Integer topic;
 
     private Integer userId;
 
@@ -23,12 +23,12 @@ public class UserWord {
         this.userWordId = userWordId;
     }
 
-    public Integer getTopi() {
-        return topi;
+    public Integer getTopic() {
+        return topic;
     }
 
-    public void setTopi(Integer topi) {
-        this.topi = topi;
+    public void setTopic(Integer topic) {
+        this.topic = topic;
     }
 
     public Integer getUserId() {

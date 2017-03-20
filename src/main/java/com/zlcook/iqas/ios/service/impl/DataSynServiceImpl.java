@@ -252,7 +252,6 @@ public class DataSynServiceImpl implements DataSynService {
 				}
 				dataSynRecordDao.updateSynTableMetaVersion(userId, TableNameConstant.SYN_USERLEARNINGSTYLE);
 			}
-
 			List<UserTestCount> listUserTestCount = tableData.getUserTestCount();
 			if( listUserTestCount != null  && listUserTestCount.size()>0){
 				for(UserTestCount entity : listUserTestCount){
@@ -280,7 +279,6 @@ public class DataSynServiceImpl implements DataSynService {
 			if( listUserTest != null  && listUserTest.size()>0){
 				//删除之前的数据
 				userTestDao.deleteByUserId(userId);
-				System.out.println(listUserTest.toString());
 				//插入新的数据
 				for(UserTest entity : listUserTest){
 					//让其id自动生成

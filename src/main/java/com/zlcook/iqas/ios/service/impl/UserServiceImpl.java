@@ -66,7 +66,16 @@ public class UserServiceImpl implements UserService {
 			user.setResourcecount2(0);
 			user.setResourcecount3(0);
 			user.setResourcecount4(0);
-			user.setPresentgrade(0);
+			Integer score = form.getEnglishscore();
+			if( score == null ){
+				user.setPresentgrade(3);
+			}else if( score >= 90 ){
+			  user.setPresentgrade(5);
+			}else if( score < 70 ){
+				  user.setPresentgrade(3);
+			}else{
+				  user.setPresentgrade(4);
+			}
 			userDao.save(user);
 
 			//初始化用户关于同步数据表的元数据表
